@@ -6,7 +6,7 @@ import swaggerDocs from '../utils/Swagger.js';
 import cookieParser from 'cookie-parser';
 // import { auth } from '../routes/auth.js';
 // import { router } from '../routes/router.js';
-import { errorMiddleware } from '../middleware/ErrorMiddleware.js';
+import { ErrorMiddleware } from '../middleware/ErrorMiddleware.js';
 
 export const app = express();
 swaggerDocs(app, 3000);
@@ -25,4 +25,4 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/assets', express.static(path.join('assets')));
 // app.use(auth);
 // app.use(router);
-app.use(errorMiddleware);
+app.use(ErrorMiddleware);
