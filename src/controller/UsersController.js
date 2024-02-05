@@ -26,7 +26,22 @@ const VerifikasiUserController = async (req, res, next) => {
   }
 };
 
+// LOGIN
+const LoginUserController = async (req, res, next) => {
+  try {
+    const result = await UsersService.LoginUserService(req.body);
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil login!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   RegisterUserController,
   VerifikasiUserController,
+  LoginUserController,
 };

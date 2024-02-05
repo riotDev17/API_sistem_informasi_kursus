@@ -12,4 +12,9 @@ const VerifyEmailValidation = Joi.object({
   otp: Joi.string().length(6).required(),
 });
 
-export { RegisterUserValidation, VerifyEmailValidation };
+const LoginUserValidation = Joi.object({
+  username: Joi.string().max(50).required(),
+  password: Joi.string().max(50).required(),
+});
+
+export { RegisterUserValidation, VerifyEmailValidation, LoginUserValidation };
