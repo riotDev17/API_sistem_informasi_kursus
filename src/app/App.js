@@ -2,7 +2,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import express from 'express';
 import * as path from 'path';
-import swaggerDocs from '../utils/swagger.js';
+import swaggerDocs from '../utils/Swagger.js';
 import cookieParser from 'cookie-parser';
 // import { auth } from '../routes/auth.js';
 // import { router } from '../routes/router.js';
