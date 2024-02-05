@@ -1,0 +1,303 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id_users                 String        @id @default(uuid())
+  nama                     String        @db.VarChar(50)
+  email                    String        @unique
+  username                 String        @db.VarChar(50)
+  password                 String        @db.VarChar(50)
+  role                     String        @db.VarChar(50)
+  verifikasi_email         Boolean       @default(false)
+  tanggal_verifikasi_email DateTime?     @db.Timestamp(0)
+  createdAt                DateTime      @default(now())
+  updatedAt                DateTime      @updatedAt
+  ProfilUsers              ProfilUsers[]
+  Pendaftaran              Pendaftaran[]
+  Pengumuman               Pengumuman[]
+
+  @@map("users")
+}
+
+model ProfilUsers {
+  id_profil_users String   @id @default(uuid())
+  users_ID        String
+  foto_profil     String   @db.Text
+  tempat_lahir    String   @db.Text
+  tanggal_lahir   String   @db.VarChar(50)
+  jenis_kelamin   String   @db.VarChar(50)
+  no_telepon      Int      @db.Integer
+  alamat          String   @db.Text
+  instagram       String   @db.Text
+  whatsapp        Int      @db.Integer
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  users           Users    @relation(fields: [users_ID], references: [id_users])
+
+  @@map("profil_users")
+}
+
+model Agama {
+  id_agama    String        @id @default(uuid())
+  nama_agama  String        @db.VarChar(50)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  Pendaftaran Pendaftaran[]
+
+  @@map("agama")
+}
+
+model Pekerjaan {
+  id_pekerjaan    String        @id @default(uuid())
+  nama_pekerjaan  String        @db.VarChar(50)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  pendaftaranAyah Pendaftaran[] @relation("PekerjaanAyah")
+  pendaftaranIbu  Pendaftaran[] @relation("PekerjaanIbu")
+
+  @@map("pekerjaan")
+}
+
+model Pendidikan {
+  id_pendidikan   String        @id @default(uuid())
+  nama_pendidikan String        @db.VarChar(50)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  PendaftaranAyah Pendaftaran[] @relation("PendidikanAyah")
+  PendaftaranIbu  Pendaftaran[] @relation("PendidikanIbu")
+
+  @@map("pendidikan")
+}
+
+model Penghasilan {
+  id_penghasilan     String        @id @default(uuid())
+  jumlah_penghasilan String        @db.VarChar(50)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  PendaftaranAyah    Pendaftaran[] @relation("PenghasilanAyah")
+  PendaftaranIbu     Pendaftaran[] @relation("PenghasilanIbu")
+
+  @@map("penghasilan")
+}
+
+model Provinsi {
+  id_provinsi   String        @id @default(uuid())
+  nama_provinsi String        @db.VarChar(50)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  Kabupaten     Kabupaten[]
+  Sekolah       Sekolah[]
+  Pendaftaran   Pendaftaran[]
+
+  @@map("provinsi")
+}
+
+model Kabupaten {
+  id_kabupaten   String        @id @default(uuid())
+  nama_kabupaten String        @db.VarChar(50)
+  provinsi_ID    String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  provinsi       Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
+  Kecamatan      Kecamatan[]
+  Sekolah        Sekolah[]
+  Pendaftaran    Pendaftaran[]
+
+  @@map("kabupaten")
+}
+
+model Kecamatan {
+  id_kecamatan   String        @id @default(uuid())
+  nama_kecamatan String        @db.VarChar(50)
+  kabupaten_ID   String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  kabupaten      Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
+  Kelurahan      Kelurahan[]
+  Sekolah        Sekolah[]
+  Pendaftaran    Pendaftaran[]
+
+  @@map("kecamatan")
+}
+
+model Kelurahan {
+  id_kelurahan   String        @id @default(uuid())
+  nama_kelurahan String        @db.VarChar(50)
+  kecamatan_ID   String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  kecamatan      Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
+  Sekolah        Sekolah[]
+  Pendaftaran    Pendaftaran[]
+
+  @@map("kelurahan")
+}
+
+model Sekolah {
+  id_sekolah         String        @id @default(uuid())
+  npsn               Int           @db.Integer
+  nama_sekolah       String        @db.VarChar(50)
+  alamat             String        @db.Text
+  kode_pos           Int           @db.Integer
+  provinsi_ID        String
+  kabupaten_ID       String
+  kecamatan_ID       String
+  kelurahan_ID       String
+  status_sekolah     String        @db.VarChar(25)
+  jenjang_pendidikan String        @db.VarChar(25)
+  akreditasi         String        @db.VarChar(20)
+  email_sekolah      String        @db.VarChar(50)
+  no_telepon_sekolah Int           @db.Integer
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  provinsi           Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
+  kabupaten          Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
+  kecamatan          Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
+  kelurahan          Kelurahan     @relation(fields: [kelurahan_ID], references: [id_kelurahan])
+  Pendaftaran        Pendaftaran[]
+
+  @@map("sekolah")
+}
+
+model Pengajar {
+  id_pengajar         String   @id @default(uuid())
+  nama_pengajar       String   @db.VarChar(50)
+  kontak_telepon      Int      @db.Integer
+  gelar_pengajar      String   @db.VarChar(50)
+  keahlian_pengajar   String   @db.Text
+  pengalaman_pengajar String   @db.Text
+  biodata_pengajar    String   @db.Text
+  foto_pengajar       String   @db.Text
+  sertifikat_pengajar String   @db.Text
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  Kursus              Kursus[]
+
+  @@map("pengajar")
+}
+
+model Kursus {
+  id_kursus        String        @id @default(uuid())
+  nama_kursus      String        @db.VarChar(50)
+  topik_kursus     String        @db.VarChar(50)
+  jenjang_kursus   String        @db.VarChar(50)
+  pengajar_ID      String
+  jam_mulai        String        @db.VarChar(50)
+  jam_selesai      String        @db.VarChar(50)
+  tanggal_mulai    String        @db.VarChar(50)
+  tanggal_selesai  String        @db.VarChar(50)
+  hari_kursus      String        @db.VarChar(50)
+  harga_kursus     Int           @db.Integer
+  foto_kursus      String        @db.Text
+  syarat_kursus    String        @db.Text
+  deskripsi_kursus String        @db.Text
+  modul_kursus     String        @db.Text
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+  pengajar         Pengajar      @relation(fields: [pengajar_ID], references: [id_pengajar])
+  Pendaftaran      Pendaftaran[]
+
+  @@map("kursus")
+}
+
+model Pendaftaran {
+  id_pendaftaran      String       @id @default(uuid())
+  users_ID            String
+  kursus_ID           String
+  nisn                Int          @db.Integer
+  nis                 Int          @db.Integer
+  nik                 Int          @db.Integer
+  nama_lengkap        String       @db.VarChar(50)
+  jenis_kelamin       String       @db.VarChar(50)
+  pas_foto            String       @db.Text
+  tempat_lahir        String       @db.VarChar(50)
+  tanggal_lahir       String       @db.VarChar(50)
+  agama_ID            String
+  email               String       @db.VarChar(50)
+  no_telepon          Int          @db.Integer
+  alamat              String       @db.Text
+  provinsi_ID         String
+  kabupaten_ID        String
+  kecamatan_ID        String
+  kelurahan_ID        String
+  nama_ayah           String       @db.VarChar(50)
+  pekerjaan_ayah      String
+  no_telepon_ayah     Int          @db.Integer
+  pendidikan_ayah     String
+  penghasilan_ayah    String
+  nama_ibu            String       @db.VarChar(50)
+  pekerjaan_ibu       String
+  no_telepon_ibu      Int          @db.Integer
+  pendidikan_ibu      String
+  penghasilan_ibu     String
+  slip_gaji_ayah_ibu  String       @db.Text
+  foto_kk             String       @db.Text
+  sekolah_ID          String
+  nilai_semester_1    Int          @db.Integer
+  nilai_semester_2    Int          @db.Integer
+  nilai_semester_3    Int          @db.Integer
+  nilai_semester_4    Int          @db.Integer
+  nilai_semester_5    Int?         @db.Integer
+  nilai_semester_6    Int?         @db.Integer
+  raport              String       @db.Text
+  prestasi            String?      @db.Text
+  status_pendaftaran  String       @db.VarChar(50)
+  tanggal_pendaftaran String       @db.VarChar(50)
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+  Kursus              Kursus       @relation(fields: [kursus_ID], references: [id_kursus])
+  Users               Users        @relation(fields: [users_ID], references: [id_users])
+  Agama               Agama        @relation(fields: [agama_ID], references: [id_agama])
+  provinsi            Provinsi     @relation(fields: [provinsi_ID], references: [id_provinsi])
+  kabupaten           Kabupaten    @relation(fields: [kabupaten_ID], references: [id_kabupaten])
+  kecamatan           Kecamatan    @relation(fields: [kecamatan_ID], references: [id_kecamatan])
+  kelurahan           Kelurahan    @relation(fields: [kelurahan_ID], references: [id_kelurahan])
+  pekerjaan_ayah_ID   Pekerjaan    @relation("PekerjaanAyah", fields: [pekerjaan_ayah], references: [id_pekerjaan])
+  pekerjaan_ibu_ID    Pekerjaan    @relation("PekerjaanIbu", fields: [pekerjaan_ibu], references: [id_pekerjaan])
+  pendidikan_ayah_ID  Pendidikan   @relation(name: "PendidikanAyah", fields: [pendidikan_ayah], references: [id_pendidikan])
+  pendidikan_ibu_ID   Pendidikan   @relation("PendidikanIbu", fields: [pendidikan_ibu], references: [id_pendidikan])
+  penghasilan_ayah_ID Penghasilan  @relation(name: "PenghasilanAyah", fields: [penghasilan_ayah], references: [id_penghasilan])
+  penghasilan_ibu_ID  Penghasilan  @relation(name: "PenghasilanIbu", fields: [penghasilan_ibu], references: [id_penghasilan])
+  Sekolah             Sekolah      @relation(fields: [sekolah_ID], references: [id_sekolah])
+  Pembayaran          Pembayaran[]
+  Pengumuman          Pengumuman[]
+
+  @@map("pendaftaran")
+}
+
+model Pembayaran {
+  id_pembayaran     String      @id @default(uuid())
+  pendaftaran_ID    String
+  bukti_pembayaran  String      @db.Text
+  status_pembayaran String      @db.VarChar(50)
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  Pendaftaran       Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
+
+  @@map("pembayaran")
+}
+
+model Pengumuman {
+  id_pengumuman    String      @id @default(uuid())
+  pendafataran_ID  String
+  users_ID         String
+  hasil_pengumuman String      @db.VarChar(50)
+  nilai_test       Int         @db.Integer
+  nilai_interview  Int         @db.Integer
+  nilai_rata_rata  Int         @db.Integer
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+  Users            Users       @relation(fields: [users_ID], references: [id_users])
+  Pendafataran     Pendaftaran @relation(fields: [pendafataran_ID], references: [id_pendaftaran])
+
+  @@map("pengumuman")
+}
