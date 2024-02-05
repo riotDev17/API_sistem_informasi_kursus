@@ -17,6 +17,7 @@ model Users {
   username                 String        @db.VarChar(50)
   password                 String        @db.VarChar(100)
   role                     String        @db.VarChar(25)
+  otp                      String?       @db.VarChar(100)
   verifikasi_email         Boolean       @default(false)
   tanggal_verifikasi_email String?       @db.VarChar(50)
   createdAt                DateTime      @default(now())
