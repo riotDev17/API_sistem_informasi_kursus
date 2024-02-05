@@ -1,5 +1,7 @@
 node_modules
-.env
 prisma/migrations
 assets
 .idea
+
+# Local env files
+.env
