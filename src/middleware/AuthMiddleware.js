@@ -1,26 +1,27 @@
 import jwt from 'jsonwebtoken';
 
-export const authMiddleware = (req, res, next) => {
+export const AuthMiddleware = (req, res, next) => {
   const { authorization } = req.headers;
   if (!authorization) {
     return res
       .status(401)
       .json({
         status: 'Unauthorized',
-        message: 'Token tidak tersedia',
+        message: `HTTP 401 : Token tidak tersedia`,
       })
       .end();
   }
 
   try {
     const token = authorization.split(' ')[1];
-    req.admin = jwt.verify(token, process.env.ACCESS_TOKEN);
+    const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN);
+    req.users = decodedToken;
   } catch (e) {
     return res
       .status(401)
       .json({
         status: 'Unauthorized',
-        message: 'Token tidak valid',
+        message: 'HTTP 401 : Token tidak valid',
       })
       .end();
   }
