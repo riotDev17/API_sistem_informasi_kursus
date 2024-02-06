@@ -13,37 +13,27 @@ datasource db {
 model Users {
   id_users                 String        @id @default(uuid())
   nama                     String        @db.VarChar(50)
-  email                    String        @unique
+  email                    String        @unique @db.VarChar(50)
   username                 String        @db.VarChar(50)
-  password                 String        @db.VarChar(50)
-  role                     String        @db.VarChar(50)
+  password                 String        @db.VarChar(100)
+  role                     String        @db.VarChar(25)
+  otp                      String?       @db.VarChar(100)
+  foto_profil              String?       @db.Text
+  tempat_lahir             String?       @db.Text
+  tanggal_lahir            String?       @db.VarChar(50)
+  jenis_kelamin            String?       @db.VarChar(50)
+  no_telepon               Int?          @db.Integer
+  alamat                   String?       @db.Text
+  instagram                String?       @db.Text
+  whatsapp                 Int?          @db.Integer
   verifikasi_email         Boolean       @default(false)
-  tanggal_verifikasi_email DateTime?     @db.Timestamp(0)
+  tanggal_verifikasi_email String?       @db.VarChar(50)
   createdAt                DateTime      @default(now())
   updatedAt                DateTime      @updatedAt
-  ProfilUsers              ProfilUsers[]
   Pendaftaran              Pendaftaran[]
   Pengumuman               Pengumuman[]
 
   @@map("users")
-}
-
-model ProfilUsers {
-  id_profil_users String   @id @default(uuid())
-  users_ID        String
-  foto_profil     String   @db.Text
-  tempat_lahir    String   @db.Text
-  tanggal_lahir   String   @db.VarChar(50)
-  jenis_kelamin   String   @db.VarChar(50)
-  no_telepon      Int      @db.Integer
-  alamat          String   @db.Text
-  instagram       String   @db.Text
-  whatsapp        Int      @db.Integer
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-  users           Users    @relation(fields: [users_ID], references: [id_users])
-
-  @@map("profil_users")
 }
 
 model Agama {
