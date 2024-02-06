@@ -5,7 +5,6 @@ export default [
       'no-unused-vars': 'error',
       'no-var': 'error',
       'prefer-const': 'error',
-      'require-await': 'error',
     },
     files: ['src/**/*.js'],
   },
