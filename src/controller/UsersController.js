@@ -108,12 +108,11 @@ const LogoutUserController = async (req, res, next) => {
     const username = req.users.username;
     await UsersService.LogoutUserService(username);
 
+    res.clearCookie('token');
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil logout!',
     });
-
-    res.clearCookie('token');
   } catch (error) {
     next(error);
   }
