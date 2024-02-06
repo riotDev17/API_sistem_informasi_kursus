@@ -9,6 +9,7 @@ import {
   RegisterUserValidation,
   VerifyEmailValidation,
   LoginUserValidation,
+  GetUsersValidation,
 } from '../validation/UsersValidation.js';
 
 // REGISTER
@@ -122,6 +123,7 @@ const LoginUserService = async (request) => {
     });
 
     return {
+      username: usersData.username,
       email: usersData.email,
       role: usersData.role,
       token: token,
@@ -129,8 +131,34 @@ const LoginUserService = async (request) => {
   }
 };
 
+// GET
+const GetUsersService = async (username) => {
+  username = Validation(GetUsersValidation, username);
+  const users = await prismaClient.users.findFirst({
+    where: {
+      username: username,
+    },
+    select: {
+      id_users: true,
+      nama: true,
+      email: true,
+      username: true,
+      role: true,
+      verifikasi_email: true,
+      tanggal_verifikasi_email: true,
+    },
+  });
+
+  if (!users) {
+    throw new ResponseError(404, 'Username tidak ditemukan!');
+  }
+
+  return users;
+};
+
 export default {
   RegisterUserService,
   VerifikasiUserService,
   LoginUserService,
+  GetUsersService,
 };

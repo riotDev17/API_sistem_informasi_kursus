@@ -40,8 +40,24 @@ const LoginUserController = async (req, res, next) => {
   }
 };
 
+// GET
+const GetUsersController = async (req, res, next) => {
+  try {
+    const username = req.users.username;
+    const result = await UsersService.GetUsersService(username);
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil menampilkan data!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   RegisterUserController,
   VerifikasiUserController,
   LoginUserController,
+  GetUsersController,
 };
