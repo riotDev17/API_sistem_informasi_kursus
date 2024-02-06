@@ -1,3 +1,5 @@
+import multer from 'multer';
+import uploadFile from '../utils/Multer.js';
 import UsersService from '../service/UsersService.js';
 
 // REGISTER
@@ -49,14 +51,51 @@ const LoginUserController = async (req, res, next) => {
 };
 
 // GET
-const GetUsersController = async (req, res, next) => {
+const GetUserController = async (req, res, next) => {
   try {
     const username = req.users.username;
-    const result = await UsersService.GetUsersService(username);
+    const result = await UsersService.GetUserService(username);
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil menampilkan data!',
       data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// UPDATE
+const UpdateUserController = async (req, res, next) => {
+  try {
+    uploadFile.single('foto_profil')(req, res, async (error) => {
+      if (error instanceof multer.MulterError) {
+        res.status(400).json({
+          status: 'ERROR',
+          message: error.message,
+        });
+      } else if (error) {
+        next(error);
+      } else {
+        const { userId } = req.params;
+        const request = req.body;
+        request.id_users = userId;
+
+        if (req.file) {
+          request.foto_profil = req.file.path;
+        }
+
+        try {
+          const result = await UsersService.UpdateUserService(request);
+          res.status(200).json({
+            status: 'SUCCESS',
+            message: 'Berhasil update data user!',
+            data: result,
+          });
+        } catch (error) {
+          next(error);
+        }
+      }
     });
   } catch (error) {
     next(error);
@@ -84,6 +123,7 @@ export default {
   RegisterUserController,
   VerifikasiUserController,
   LoginUserController,
-  GetUsersController,
+  GetUserController,
+  UpdateUserController,
   LogoutUserController,
 };

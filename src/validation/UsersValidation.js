@@ -17,6 +17,19 @@ const LoginUserValidation = Joi.object({
   password: Joi.string().max(50).required(),
 });
 
+const UpdateUserValidation = Joi.object({
+  id_users: Joi.string().max(100).required(),
+  nama: Joi.string().max(50).required(),
+  foto_profil: Joi.string().optional(),
+  tempat_lahir: Joi.string().required(),
+  tanggal_lahir: Joi.string().max(50).required(),
+  jenis_kelamin: Joi.string().max(50).required(),
+  no_telepon: Joi.number().required(),
+  alamat: Joi.string().required(),
+  instagram: Joi.string().required(),
+  whatsapp: Joi.number().required(),
+});
+
 const GetUsersValidation = Joi.string().max(100);
 const LogoutUserValidation = Joi.string().max(100);
 
@@ -25,5 +38,6 @@ export {
   VerifyEmailValidation,
   LoginUserValidation,
   GetUsersValidation,
+  UpdateUserValidation,
   LogoutUserValidation,
 };

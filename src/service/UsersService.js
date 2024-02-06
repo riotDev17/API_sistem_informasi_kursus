@@ -11,6 +11,7 @@ import {
   LoginUserValidation,
   GetUsersValidation,
   LogoutUserValidation,
+  UpdateUserValidation,
 } from '../validation/UsersValidation.js';
 
 // REGISTER
@@ -133,7 +134,7 @@ const LoginUserService = async (request) => {
 };
 
 // GET
-const GetUsersService = async (username) => {
+const GetUserService = async (username) => {
   username = Validation(GetUsersValidation, username);
   const users = await prismaClient.users.findFirst({
     where: {
@@ -157,6 +158,44 @@ const GetUsersService = async (username) => {
   return users;
 };
 
+// UPDATE
+const UpdateUserService = async (request) => {
+  const users = await Validation(UpdateUserValidation, request);
+  const usersExist = await prismaClient.users.count({
+    where: {
+      id_users: users.id_users,
+    },
+  });
+
+  if (usersExist !== 1) {
+    throw new ResponseError(404, 'User tidak ditemukan!');
+  }
+
+  return prismaClient.users.update({
+    where: {
+      id_users: users.id_users,
+    },
+    data: users,
+    select: {
+      id_users: true,
+      nama: true,
+      email: true,
+      username: true,
+      role: true,
+      foto_profil: true,
+      tempat_lahir: true,
+      tanggal_lahir: true,
+      jenis_kelamin: true,
+      no_telepon: true,
+      alamat: true,
+      instagram: true,
+      whatsapp: true,
+      verifikasi_email: true,
+      tanggal_verifikasi_email: true,
+    },
+  });
+};
+
 // LOGOUT
 const LogoutUserService = async (username) => {
   username = await Validation(LogoutUserValidation, username);
@@ -177,6 +216,7 @@ export default {
   RegisterUserService,
   VerifikasiUserService,
   LoginUserService,
-  GetUsersService,
+  GetUserService,
+  UpdateUserService,
   LogoutUserService,
 };
