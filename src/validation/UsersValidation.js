@@ -18,10 +18,12 @@ const LoginUserValidation = Joi.object({
 });
 
 const GetUsersValidation = Joi.string().max(100);
+const LogoutUserValidation = Joi.string().max(100);
 
 export {
   RegisterUserValidation,
   VerifyEmailValidation,
   LoginUserValidation,
   GetUsersValidation,
+  LogoutUserValidation,
 };

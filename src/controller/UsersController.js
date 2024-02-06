@@ -55,9 +55,24 @@ const GetUsersController = async (req, res, next) => {
   }
 };
 
+// LOGOUT
+const LogoutUserController = async (req, res, next) => {
+  try {
+    const username = req.users.username;
+    await UsersService.LogoutUserService(username);
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil logout!',
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export default {
   RegisterUserController,
   VerifikasiUserController,
   LoginUserController,
   GetUsersController,
+  LogoutUserController,
 };

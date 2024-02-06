@@ -7,5 +7,6 @@ Router.use(AuthMiddleware);
 
 // USERS
 Router.get('/api/users', UsersController.GetUsersController);
+Router.delete('/api/users/logout', UsersController.LogoutUserController);
 
 export { Router };
