@@ -30,6 +30,14 @@ const VerifikasiUserController = async (req, res, next) => {
 const LoginUserController = async (req, res, next) => {
   try {
     const result = await UsersService.LoginUserService(req.body);
+    const token = result.token;
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // Set to true in production
+      maxAge: 7 * 24 * 60 * 60 * 1000, // Token expiry time in milliseconds (e.g., 7 days)
+    });
+
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil login!',
@@ -60,10 +68,13 @@ const LogoutUserController = async (req, res, next) => {
   try {
     const username = req.users.username;
     await UsersService.LogoutUserService(username);
+
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil logout!',
     });
+
+    res.clearCookie('token');
   } catch (error) {
     next(error);
   }
