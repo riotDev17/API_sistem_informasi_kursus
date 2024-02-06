@@ -35,7 +35,7 @@ const LoginUserController = async (req, res, next) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', // Set to true in production
-      maxAge: 7 * 24 * 60 * 60 * 1000, // Token expiry time in milliseconds (e.g., 7 days)
+      maxAge: 24 * 60 * 60 * 1000, // Token expiry time in milliseconds (e.g., 7 days)
     });
 
     res.status(200).json({

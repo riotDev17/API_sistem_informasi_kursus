@@ -118,7 +118,7 @@ const LoginUserService = async (request) => {
     };
 
     const accessToken = process.env.ACCESS_TOKEN;
-    const tokenExpired = 60 * 60 * 24;
+    const tokenExpired = 24 * 60 * 60 * 1000;
     const token = jwt.sign(payload, accessToken, {
       expiresIn: tokenExpired,
     });
