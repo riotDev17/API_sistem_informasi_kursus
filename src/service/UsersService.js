@@ -56,21 +56,21 @@ const RegisterUserService = async (request) => {
 // VERIFIKASI EMAIL
 const VerifikasiUserService = async (request) => {
   const users = await Validation(VerifyEmailValidation, request);
-  const isEmailExist = await prismaClient.users.findUnique({
+  const emailExist = await prismaClient.users.findUnique({
     where: {
       email: users.email,
     },
   });
 
-  if (!isEmailExist) {
+  if (!emailExist) {
     throw new ResponseError(404, 'Email tidak ditemukan!');
   }
 
-  const isOTPMatch = bcrypt.compare(users.otp, isEmailExist.otp);
+  const isOTPMatch = await bcrypt.compare(users.otp, emailExist.otp);
 
   if (!isOTPMatch) {
     throw new ResponseError(400, 'OTP tidak valid!');
-  } else if (isOTPMatch) {
+  } else {
     return prismaClient.users.update({
       where: {
         email: users.email,
