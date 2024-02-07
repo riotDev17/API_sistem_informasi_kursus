@@ -4,6 +4,7 @@ import AgamaController from '../controller/AgamaController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
 import PendidikanController from '../controller/PendidikanController.js';
+import PenghasilanController from '../controller/PenghasilanController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -50,6 +51,25 @@ Router.put(
 Router.delete(
   '/api/pendidikan/:pendidikanId',
   PendidikanController.DeletePendidikanController,
+);
+
+// PENGHASILAN
+Router.get('/api/penghasilan', PenghasilanController.GetPenghasilanController);
+Router.post(
+  '/api/penghasilan',
+  PenghasilanController.CreatePenghasilanController,
+);
+Router.get(
+  '/api/penghasilan/:penghasilanId',
+  PenghasilanController.GetPenghasilanByIdController,
+);
+Router.put(
+  '/api/penghasilan/:penghasilanId',
+  PenghasilanController.UpdatePenghasilanController,
+);
+Router.delete(
+  '/api/penghasilan/:penghasilanId',
+  PenghasilanController.DeletePenghasilanController,
 );
 
 export { Router };
