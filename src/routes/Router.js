@@ -3,6 +3,7 @@ import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
+import PendidikanController from '../controller/PendidikanController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -33,6 +34,22 @@ Router.put(
 Router.delete(
   '/api/pekerjaan/:pekerjaanId',
   PekerjaanController.DeletePekerjaanController,
+);
+
+// PENDIDIKAN
+Router.get('/api/pendidikan', PendidikanController.GetPendidikanController);
+Router.post('/api/pendidikan', PendidikanController.CreatePendidikanController);
+Router.get(
+  '/api/pendidikan/:pendidikanId',
+  PendidikanController.GetPendidikanByIdController,
+);
+Router.put(
+  '/api/pendidikan/:pendidikanId',
+  PendidikanController.UpdatePendidikanController,
+);
+Router.delete(
+  '/api/pendidikan/:pendidikanId',
+  PendidikanController.DeletePendidikanController,
 );
 
 export { Router };
