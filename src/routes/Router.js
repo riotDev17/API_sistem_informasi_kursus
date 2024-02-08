@@ -1,13 +1,14 @@
 import express from 'express';
 import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
+import ProvinsiController from '../controller/ProvinsiController.js';
+import KabupatenController from '../controller/KabupatenController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
+import KecamatanController from '../controller/KecamatanController.js';
+import KelurahanController from '../controller/KelurahanController.js';
 import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
-import ProvinsiController from '../controller/ProvinsiController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
-import KabupatenController from '../controller/KabupatenController.js';
-import KecamatanController from '../controller/KecamatanController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -121,6 +122,22 @@ Router.put(
 Router.delete(
   '/api/kecamatan/:kecamatanId',
   KecamatanController.DeleteKecamatanController,
+);
+
+// KELURAHAN
+Router.get('/api/kelurahan', KelurahanController.GetKelurahanController);
+Router.post('/api/kelurahan', KelurahanController.CreateKelurahanController);
+Router.get(
+  '/api/kelurahan/:kelurahanId',
+  KelurahanController.GetKelurahanByIdController,
+);
+Router.put(
+  '/api/kelurahan/:kelurahanId',
+  KelurahanController.UpdateKelurahanController,
+);
+Router.delete(
+  '/api/kelurahan/:kelurahanId',
+  KelurahanController.DeleteKelurahanController,
 );
 
 export { Router };
