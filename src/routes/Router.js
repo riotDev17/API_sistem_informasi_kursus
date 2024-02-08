@@ -2,9 +2,10 @@ import express from 'express';
 import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
-import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
 import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
+import ProvinsiController from '../controller/ProvinsiController.js';
+import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -70,6 +71,22 @@ Router.put(
 Router.delete(
   '/api/penghasilan/:penghasilanId',
   PenghasilanController.DeletePenghasilanController,
+);
+
+// PROVINSI
+Router.get('/api/provinsi', ProvinsiController.GetProvinsiController);
+Router.post('/api/provinsi', ProvinsiController.CreateProvinsiController);
+Router.get(
+  '/api/provinsi/:provinsiId',
+  ProvinsiController.GetProvinsiByIdController,
+);
+Router.put(
+  '/api/provinsi/:provinsiId',
+  ProvinsiController.UpdateProvinsiController,
+);
+Router.delete(
+  '/api/provinsi/:provinsiId',
+  ProvinsiController.DeleteProvinsiController,
 );
 
 export { Router };
