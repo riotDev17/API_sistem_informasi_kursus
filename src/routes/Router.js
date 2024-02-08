@@ -7,6 +7,7 @@ import PenghasilanController from '../controller/PenghasilanController.js';
 import ProvinsiController from '../controller/ProvinsiController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
 import KabupatenController from '../controller/KabupatenController.js';
+import KecamatanController from '../controller/KecamatanController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -104,6 +105,22 @@ Router.put(
 Router.delete(
   '/api/kabupaten/:kabupatenId',
   KabupatenController.DeleteKabupatenController,
+);
+
+// KECAMATAN
+Router.get('/api/kecamatan', KecamatanController.GetKecamatanController);
+Router.post('/api/kecamatan', KecamatanController.CreateKecamatanController);
+Router.get(
+  '/api/kecamatan/:kecamatanId',
+  KecamatanController.GetKecamatanByIdController,
+);
+Router.put(
+  '/api/kecamatan/:kecamatanId',
+  KecamatanController.UpdateKecamatanController,
+);
+Router.delete(
+  '/api/kecamatan/:kecamatanId',
+  KecamatanController.DeleteKecamatanController,
 );
 
 export { Router };
