@@ -1,6 +1,7 @@
 import express from 'express';
 import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
+import SekolahController from '../controller/SekolahController.js';
 import ProvinsiController from '../controller/ProvinsiController.js';
 import KabupatenController from '../controller/KabupatenController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
@@ -138,6 +139,22 @@ Router.put(
 Router.delete(
   '/api/kelurahan/:kelurahanId',
   KelurahanController.DeleteKelurahanController,
+);
+
+// SEKOLAH
+Router.get('/api/sekolah', SekolahController.GetSekolahController);
+Router.post('/api/sekolah', SekolahController.CreateSekolahController);
+Router.get(
+  '/api/sekolah/:sekolahId',
+  SekolahController.GetSekolahByIdController,
+);
+Router.put(
+  '/api/sekolah/:sekolahId',
+  SekolahController.UpdateSekolahController,
+);
+Router.delete(
+  '/api/sekolah/:sekolahId',
+  SekolahController.DeleteSekolahController,
 );
 
 export { Router };
