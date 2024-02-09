@@ -22,10 +22,10 @@ model Users {
   tempat_lahir             String?       @db.Text
   tanggal_lahir            String?       @db.VarChar(50)
   jenis_kelamin            String?       @db.VarChar(50)
-  no_telepon               Int?          @db.Integer
+  no_telepon               String?       @db.VarChar(25)
   alamat                   String?       @db.Text
   instagram                String?       @db.Text
-  whatsapp                 Int?          @db.Integer
+  whatsapp                 String?       @db.VarChar(25)
   verifikasi_email         Boolean       @default(false)
   tanggal_verifikasi_email String?       @db.VarChar(50)
   createdAt                DateTime      @default(now())
@@ -146,7 +146,7 @@ model Sekolah {
   jenjang_pendidikan String        @db.VarChar(25)
   akreditasi         String        @db.VarChar(20)
   email_sekolah      String        @db.VarChar(50)
-  no_telepon_sekolah Int           @db.Integer
+  no_telepon_sekolah String        @db.VarChar(25)
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
   provinsi           Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
@@ -161,7 +161,7 @@ model Sekolah {
 model Pengajar {
   id_pengajar         String   @id @default(uuid())
   nama_pengajar       String   @db.VarChar(50)
-  kontak_telepon      Int      @db.Integer
+  no_telepon_pengajar String   @db.VarChar(25)
   gelar_pengajar      String   @db.VarChar(50)
   keahlian_pengajar   String   @db.Text
   pengalaman_pengajar String   @db.Text
@@ -213,7 +213,7 @@ model Pendaftaran {
   tanggal_lahir       String       @db.VarChar(50)
   agama_ID            String
   email               String       @db.VarChar(50)
-  no_telepon          Int          @db.Integer
+  no_telepon          String       @db.VarChar(25)
   alamat              String       @db.Text
   provinsi_ID         String
   kabupaten_ID        String
@@ -221,12 +221,12 @@ model Pendaftaran {
   kelurahan_ID        String
   nama_ayah           String       @db.VarChar(50)
   pekerjaan_ayah      String
-  no_telepon_ayah     Int          @db.Integer
+  no_telepon_ayah     String       @db.VarChar(25)
   pendidikan_ayah     String
   penghasilan_ayah    String
   nama_ibu            String       @db.VarChar(50)
   pekerjaan_ibu       String
-  no_telepon_ibu      Int          @db.Integer
+  no_telepon_ibu      String       @db.VarChar(25)
   pendidikan_ibu      String
   penghasilan_ibu     String
   slip_gaji_ayah_ibu  String       @db.Text

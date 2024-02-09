@@ -148,6 +148,14 @@ const GetUserService = async (username) => {
       role: true,
       verifikasi_email: true,
       tanggal_verifikasi_email: true,
+      foto_profil: true,
+      tempat_lahir: true,
+      tanggal_lahir: true,
+      jenis_kelamin: true,
+      no_telepon: true,
+      alamat: true,
+      instagram: true,
+      whatsapp: true,
     },
   });
 

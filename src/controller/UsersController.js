@@ -31,15 +31,8 @@ const VerifikasiUserController = async (req, res, next) => {
 // LOGIN
 const LoginUserController = async (req, res, next) => {
   try {
-    const result = await UsersService.LoginUserService(req.body);
-    const token = result.token;
-
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Set to true in production
-      maxAge: 24 * 60 * 60 * 1000, // Token expiry time in milliseconds (e.g., 7 days)
-    });
-
+    const request = req.body;
+    const result = await UsersService.LoginUserService(request);
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil login!',
@@ -76,25 +69,25 @@ const UpdateUserController = async (req, res, next) => {
         });
       } else if (error) {
         next(error);
-      } else {
-        const { userId } = req.params;
-        const request = req.body;
-        request.id_users = userId;
+      }
 
-        if (req.file) {
-          request.foto_profil = req.file.path;
-        }
+      const { userId } = req.params;
+      const request = req.body;
+      request.id_users = userId;
 
-        try {
-          const result = await UsersService.UpdateUserService(request);
-          res.status(200).json({
-            status: 'SUCCESS',
-            message: 'Berhasil update data user!',
-            data: result,
-          });
-        } catch (error) {
-          next(error);
-        }
+      if (req.file) {
+        request.foto_profil = req.file.path;
+      }
+
+      try {
+        const result = await UsersService.UpdateUserService(request);
+        res.status(200).json({
+          status: 'SUCCESS',
+          message: 'Berhasil update data user!',
+          data: result,
+        });
+      } catch (error) {
+        next(error);
       }
     });
   } catch (error) {
@@ -107,8 +100,6 @@ const LogoutUserController = async (req, res, next) => {
   try {
     const username = req.users.username;
     await UsersService.LogoutUserService(username);
-
-    res.clearCookie('token');
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil logout!',

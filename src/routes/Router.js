@@ -1,6 +1,7 @@
 import express from 'express';
 import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
+import SekolahController from '../controller/SekolahController.js';
 import ProvinsiController from '../controller/ProvinsiController.js';
 import KabupatenController from '../controller/KabupatenController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
@@ -9,6 +10,7 @@ import KelurahanController from '../controller/KelurahanController.js';
 import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
+import PengajarController from '../controller/PengajarController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -138,6 +140,38 @@ Router.put(
 Router.delete(
   '/api/kelurahan/:kelurahanId',
   KelurahanController.DeleteKelurahanController,
+);
+
+// SEKOLAH
+Router.get('/api/sekolah', SekolahController.GetSekolahController);
+Router.post('/api/sekolah', SekolahController.CreateSekolahController);
+Router.get(
+  '/api/sekolah/:sekolahId',
+  SekolahController.GetSekolahByIdController,
+);
+Router.put(
+  '/api/sekolah/:sekolahId',
+  SekolahController.UpdateSekolahController,
+);
+Router.delete(
+  '/api/sekolah/:sekolahId',
+  SekolahController.DeleteSekolahController,
+);
+
+// PENGAJAR
+Router.get('/api/pengajar', PengajarController.GetPengajarController);
+Router.post('/api/pengajar', PengajarController.CreatePengajarController);
+Router.get(
+  '/api/pengajar/:pengajarId',
+  PengajarController.GetPengajarByIdController,
+);
+Router.put(
+  '/api/pengajar/:pengajarId',
+  PengajarController.UpdatePengajarController,
+);
+Router.delete(
+  '/api/pengajar/:pengajarId',
+  PengajarController.DeletePengajarController,
 );
 
 export { Router };
