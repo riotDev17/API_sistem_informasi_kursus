@@ -47,6 +47,9 @@ const GetSekolahService = async () => {
       email_sekolah: true,
       no_telepon_sekolah: true,
     },
+    orderBy:{
+      createdAt: 'desc',
+    }
   });
 };
 
