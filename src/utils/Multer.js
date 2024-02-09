@@ -13,10 +13,11 @@ const fileFilter = (req, file, cb) => {
   if (
     file.mimetype === 'image/png' ||
     file.mimetype === 'image/jpg' ||
-    file.mimetype === 'image/jpeg' ||
-    file.mimetype === 'application/pdf'
+    file.mimetype === 'image/jpeg'
   ) {
-    cb(null, true);
+    cb(null, 'images');
+  } else if (file.mimetype === 'application/pdf') {
+    cb(null, 'files');
   } else {
     cb(
       new multer.MulterError(
