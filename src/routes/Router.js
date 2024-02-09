@@ -10,6 +10,7 @@ import KelurahanController from '../controller/KelurahanController.js';
 import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
+import PengajarController from '../controller/PengajarController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -155,6 +156,22 @@ Router.put(
 Router.delete(
   '/api/sekolah/:sekolahId',
   SekolahController.DeleteSekolahController,
+);
+
+// PENGAJAR
+Router.get('/api/pengajar', PengajarController.GetPengajarController);
+Router.post('/api/pengajar', PengajarController.CreatePengajarController);
+Router.get(
+  '/api/pengajar/:pengajarId',
+  PengajarController.GetPengajarByIdController,
+);
+Router.put(
+  '/api/pengajar/:pengajarId',
+  PengajarController.UpdatePengajarController,
+);
+Router.delete(
+  '/api/pengajar/:pengajarId',
+  PengajarController.DeletePengajarController,
 );
 
 export { Router };
