@@ -22,7 +22,7 @@ model Users {
   tempat_lahir             String?       @db.Text
   tanggal_lahir            String?       @db.VarChar(50)
   jenis_kelamin            String?       @db.VarChar(50)
-  no_telepon               String?        @db.VarChar(25)
+  no_telepon               String?       @db.VarChar(25)
   alamat                   String?       @db.Text
   instagram                String?       @db.Text
   whatsapp                 Int?          @db.Integer
@@ -161,7 +161,7 @@ model Sekolah {
 model Pengajar {
   id_pengajar         String   @id @default(uuid())
   nama_pengajar       String   @db.VarChar(50)
-  kontak_telepon      Int      @db.Integer
+  no_telepon_pengajar String   @db.VarChar(25)
   gelar_pengajar      String   @db.VarChar(50)
   keahlian_pengajar   String   @db.Text
   pengalaman_pengajar String   @db.Text
