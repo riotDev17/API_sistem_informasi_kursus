@@ -15,7 +15,7 @@ const CreateSekolahValidation = Joi.object({
   jenjang_pendidikan: Joi.string().max(25).required(),
   akreditasi: Joi.string().required(),
   email_sekolah: Joi.string().email().max(50).required(),
-  no_telepon_sekolah: Joi.number().required(),
+  no_telepon_sekolah: Joi.string().max(25).required(),
 });
 
 const UpdateSekolahValidation = Joi.object({
@@ -32,7 +32,7 @@ const UpdateSekolahValidation = Joi.object({
   jenjang_pendidikan: Joi.string().required(),
   akreditasi: Joi.string().required(),
   email_sekolah: Joi.string().email().required(),
-  no_telepon_sekolah: Joi.number().required(),
+  no_telepon_sekolah: Joi.string().max(25).required(),
 });
 
 const DeleteSekolahValidation = Joi.string().max(100).required();
