@@ -25,7 +25,7 @@ model Users {
   no_telepon               String?       @db.VarChar(25)
   alamat                   String?       @db.Text
   instagram                String?       @db.Text
-  whatsapp                 Int?          @db.Integer
+  whatsapp                 String?       @db.VarChar(25)
   verifikasi_email         Boolean       @default(false)
   tanggal_verifikasi_email String?       @db.VarChar(50)
   createdAt                DateTime      @default(now())
