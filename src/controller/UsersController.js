@@ -46,8 +46,8 @@ const LoginUserController = async (req, res, next) => {
 // GET
 const GetUserController = async (req, res, next) => {
   try {
-    const username = req.users.username;
-    const result = await UsersService.GetUserService(username);
+    const email = req.users.email;
+    const result = await UsersService.GetUserService(email);
     res.status(200).json({
       status: 'SUCCESS',
       message: 'Berhasil menampilkan data!',

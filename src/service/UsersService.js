@@ -134,11 +134,11 @@ const LoginUserService = async (request) => {
 };
 
 // GET
-const GetUserService = async (username) => {
-  username = Validation(GetUsersValidation, username);
+const GetUserService = async (email) => {
+  email = Validation(GetUsersValidation, email);
   const users = await prismaClient.users.findFirst({
     where: {
-      username: username,
+      email: email,
     },
     select: {
       id_users: true,
