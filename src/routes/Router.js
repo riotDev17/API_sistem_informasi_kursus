@@ -11,6 +11,7 @@ import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
 import PengajarController from '../controller/PengajarController.js';
+import KursusController from '../controller/KursusController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -173,5 +174,12 @@ Router.delete(
   '/api/pengajar/:pengajarId',
   PengajarController.DeletePengajarController,
 );
+
+// KURSUS
+Router.get('/api/kursus', KursusController.GetKursusController);
+Router.post('/api/kursus', KursusController.CreateKursusController);
+Router.get('/api/kursus/:kursusId', KursusController.GetKursusByIdController);
+Router.put('/api/kursus/:kursusId', KursusController.UpdateKursusController);
+Router.delete('/api/kursus/:kursusId', KursusController.DeleteKursusController);
 
 export { Router };
