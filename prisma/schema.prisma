@@ -240,8 +240,8 @@ model Pendaftaran {
   nilai_semester_6    Int?         @db.Integer
   raport              String       @db.Text
   prestasi            String?      @db.Text
-  status_pendaftaran  String       @db.VarChar(50)
-  tanggal_pendaftaran String       @db.VarChar(50)
+  status_pendaftaran  String?      @db.VarChar(50)
+  tanggal_pendaftaran DateTime     @default(now())
   createdAt           DateTime     @default(now())
   updatedAt           DateTime     @updatedAt
   Kursus              Kursus       @relation(fields: [kursus_ID], references: [id_kursus])
