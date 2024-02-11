@@ -220,15 +220,15 @@ model Pendaftaran {
   kecamatan_ID        String
   kelurahan_ID        String
   nama_ayah           String       @db.VarChar(50)
-  pekerjaan_ayah      String
+  pekerjaan_ayah_ID   String
   no_telepon_ayah     String       @db.VarChar(25)
-  pendidikan_ayah     String
-  penghasilan_ayah    String
+  pendidikan_ayah_ID  String
+  penghasilan_ayah_ID String
   nama_ibu            String       @db.VarChar(50)
-  pekerjaan_ibu       String
+  pekerjaan_ibu_ID    String
   no_telepon_ibu      String       @db.VarChar(25)
-  pendidikan_ibu      String
-  penghasilan_ibu     String
+  pendidikan_ibu_ID   String
+  penghasilan_ibu_ID  String
   slip_gaji_ayah_ibu  String       @db.Text
   foto_kk             String       @db.Text
   sekolah_ID          String
@@ -240,24 +240,24 @@ model Pendaftaran {
   nilai_semester_6    Int?         @db.Integer
   raport              String       @db.Text
   prestasi            String?      @db.Text
-  status_pendaftaran  String       @db.VarChar(50)
-  tanggal_pendaftaran String       @db.VarChar(50)
+  status_pendaftaran  String?      @db.VarChar(50)
+  tanggal_pendaftaran DateTime     @default(now())
   createdAt           DateTime     @default(now())
   updatedAt           DateTime     @updatedAt
-  Kursus              Kursus       @relation(fields: [kursus_ID], references: [id_kursus])
-  Users               Users        @relation(fields: [users_ID], references: [id_users])
-  Agama               Agama        @relation(fields: [agama_ID], references: [id_agama])
+  kursus              Kursus       @relation(fields: [kursus_ID], references: [id_kursus])
+  users               Users        @relation(fields: [users_ID], references: [id_users])
+  agama               Agama        @relation(fields: [agama_ID], references: [id_agama])
   provinsi            Provinsi     @relation(fields: [provinsi_ID], references: [id_provinsi])
   kabupaten           Kabupaten    @relation(fields: [kabupaten_ID], references: [id_kabupaten])
   kecamatan           Kecamatan    @relation(fields: [kecamatan_ID], references: [id_kecamatan])
   kelurahan           Kelurahan    @relation(fields: [kelurahan_ID], references: [id_kelurahan])
-  pekerjaan_ayah_ID   Pekerjaan    @relation("PekerjaanAyah", fields: [pekerjaan_ayah], references: [id_pekerjaan])
-  pekerjaan_ibu_ID    Pekerjaan    @relation("PekerjaanIbu", fields: [pekerjaan_ibu], references: [id_pekerjaan])
-  pendidikan_ayah_ID  Pendidikan   @relation(name: "PendidikanAyah", fields: [pendidikan_ayah], references: [id_pendidikan])
-  pendidikan_ibu_ID   Pendidikan   @relation("PendidikanIbu", fields: [pendidikan_ibu], references: [id_pendidikan])
-  penghasilan_ayah_ID Penghasilan  @relation(name: "PenghasilanAyah", fields: [penghasilan_ayah], references: [id_penghasilan])
-  penghasilan_ibu_ID  Penghasilan  @relation(name: "PenghasilanIbu", fields: [penghasilan_ibu], references: [id_penghasilan])
-  Sekolah             Sekolah      @relation(fields: [sekolah_ID], references: [id_sekolah])
+  pekerjaan_ayah      Pekerjaan?   @relation("PekerjaanAyah", fields: [pekerjaan_ayah_ID], references: [id_pekerjaan])
+  pekerjaan_ibu       Pekerjaan?   @relation("PekerjaanIbu", fields: [pekerjaan_ibu_ID], references: [id_pekerjaan])
+  pendidikan_ayah     Pendidikan?  @relation(name: "PendidikanAyah", fields: [pendidikan_ayah_ID], references: [id_pendidikan])
+  pendidikan_ibu      Pendidikan?  @relation("PendidikanIbu", fields: [pendidikan_ibu_ID], references: [id_pendidikan])
+  penghasilan_ayah    Penghasilan? @relation(name: "PenghasilanAyah", fields: [penghasilan_ayah_ID], references: [id_penghasilan])
+  penghasilan_ibu     Penghasilan? @relation(name: "PenghasilanIbu", fields: [penghasilan_ibu_ID], references: [id_penghasilan])
+  sekolah             Sekolah      @relation(fields: [sekolah_ID], references: [id_sekolah])
   Pembayaran          Pembayaran[]
   Pengumuman          Pengumuman[]
 
@@ -271,7 +271,7 @@ model Pembayaran {
   status_pembayaran String      @db.VarChar(50)
   createdAt         DateTime    @default(now())
   updatedAt         DateTime    @updatedAt
-  Pendaftaran       Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
+  pendaftaran       Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
 
   @@map("pembayaran")
 }
