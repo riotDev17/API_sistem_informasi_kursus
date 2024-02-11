@@ -13,6 +13,7 @@ import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
 import PendaftaranController from '../controller/PendaftaranController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
+import PembayaranController from '../controller/PembayaranController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -204,6 +205,21 @@ Router.put(
 Router.delete(
   '/api/pendaftaran/:pendaftaranId',
   PendaftaranController.DeletePendaftaranController,
+);
+
+// PEMBAYARAN
+Router.get('/api/pembayaran', PembayaranController.GetPembayaranController);
+Router.post(
+  '/api/pembayaran/:pendaftaranId',
+  PembayaranController.CreatePembayaranController,
+);
+Router.put(
+  '/api/pembayaran/verify/:pembayaranId',
+  PembayaranController.ChangeStatusPembayaranVerifyController,
+);
+Router.put(
+  '/api/pembayaran/reject/:pembayaranId',
+  PembayaranController.ChangeStatusPembayaranRejectController,
 );
 
 export { Router };
