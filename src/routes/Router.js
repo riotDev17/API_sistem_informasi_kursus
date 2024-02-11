@@ -190,6 +190,11 @@ Router.post(
   '/api/pendaftaran',
   PendaftaranController.CreatePendaftaranController,
 );
+Router.get(
+  '/api/pendaftaran/user',
+  PendaftaranController.GetPendaftaranByUserController,
+);
+
 Router.put(
   '/api/pendaftaran/verify/:pendaftaranId',
   PendaftaranController.ChangeStatusPendaftaranVerifyController,
