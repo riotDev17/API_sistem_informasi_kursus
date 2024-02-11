@@ -1,7 +1,9 @@
 import express from 'express';
 import UsersController from '../controller/UsersController.js';
 import AgamaController from '../controller/AgamaController.js';
+import KursusController from '../controller/KursusController.js';
 import SekolahController from '../controller/SekolahController.js';
+import PengajarController from '../controller/PengajarController.js';
 import ProvinsiController from '../controller/ProvinsiController.js';
 import KabupatenController from '../controller/KabupatenController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
@@ -9,9 +11,8 @@ import KecamatanController from '../controller/KecamatanController.js';
 import KelurahanController from '../controller/KelurahanController.js';
 import PendidikanController from '../controller/PendidikanController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
+import PendaftaranController from '../controller/PendaftaranController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
-import PengajarController from '../controller/PengajarController.js';
-import KursusController from '../controller/KursusController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -181,5 +182,28 @@ Router.post('/api/kursus', KursusController.CreateKursusController);
 Router.get('/api/kursus/:kursusId', KursusController.GetKursusByIdController);
 Router.put('/api/kursus/:kursusId', KursusController.UpdateKursusController);
 Router.delete('/api/kursus/:kursusId', KursusController.DeleteKursusController);
+
+// PENDAFTARAN
+Router.get('/api/pendaftaran', PendaftaranController.GetPendaftaranController);
+Router.post(
+  '/api/pendaftaran',
+  PendaftaranController.CreatePendaftaranController,
+);
+Router.put(
+  '/api/pendaftaran/verify/:pendaftaranId',
+  PendaftaranController.ChangeStatusPendaftaranVerifyController,
+);
+Router.put(
+  '/api/pendaftaran/reject/:pendaftaranId',
+  PendaftaranController.ChangeStatusPendaftaranRejectController,
+);
+Router.put(
+  '/api/pendaftaran/:pendaftaranId',
+  PendaftaranController.UpdatePendaftaranController,
+);
+Router.delete(
+  '/api/pendaftaran/:pendaftaranId',
+  PendaftaranController.DeletePendaftaranController,
+);
 
 export { Router };
