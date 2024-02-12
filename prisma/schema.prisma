@@ -278,7 +278,7 @@ model Pembayaran {
 
 model Pengumuman {
   id_pengumuman    String      @id @default(uuid())
-  pendafataran_ID  String
+  pendaftaran_ID   String
   users_ID         String
   hasil_pengumuman String      @db.VarChar(50)
   nilai_test       Int         @db.Integer
@@ -287,7 +287,7 @@ model Pengumuman {
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
   users            Users       @relation(fields: [users_ID], references: [id_users])
-  pendafataran     Pendaftaran @relation(fields: [pendafataran_ID], references: [id_pendaftaran])
+  pendafataran     Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
 
   @@map("pengumuman")
 }
