@@ -16,6 +16,23 @@ const GetPendaftaranController = async (req, res, next) => {
   }
 };
 
+// GET BY USERS
+const GetPendaftaranByUserController = async (req, res, next) => {
+  try {
+    const users = req.users;
+    const result = await PendaftaranService.GetPendaftaranByUserService(
+      users,
+    );
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil Mendapatkan Data Pendaftaran!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // CREATE
 const CreatePendaftaranController = async (req, res, next) => {
   try {
@@ -175,6 +192,7 @@ const DeletePendaftaranController = async (req, res, next) => {
 export default {
   GetPendaftaranController,
   CreatePendaftaranController,
+  GetPendaftaranByUserController,
   ChangeStatusPendaftaranVerifyController,
   ChangeStatusPendaftaranRejectController,
   UpdatePendaftaranController,
