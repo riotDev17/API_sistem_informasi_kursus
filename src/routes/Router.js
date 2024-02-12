@@ -9,11 +9,12 @@ import KabupatenController from '../controller/KabupatenController.js';
 import PekerjaanController from '../controller/PekerjaanController.js';
 import KecamatanController from '../controller/KecamatanController.js';
 import KelurahanController from '../controller/KelurahanController.js';
+import PengumumanController from '../controller/PengumumanController.js';
 import PendidikanController from '../controller/PendidikanController.js';
+import PembayaranController from '../controller/PembayaranController.js';
 import PenghasilanController from '../controller/PenghasilanController.js';
 import PendaftaranController from '../controller/PendaftaranController.js';
 import { AuthMiddleware } from '../middleware/AuthMiddleware.js';
-import PembayaranController from '../controller/PembayaranController.js';
 
 const Router = express.Router();
 Router.use(AuthMiddleware);
@@ -225,6 +226,17 @@ Router.put(
 Router.put(
   '/api/pembayaran/reject/:pembayaranId',
   PembayaranController.ChangeStatusPembayaranRejectController,
+);
+
+// PENGUMUMAN
+Router.get('/api/pengumuman', PengumumanController.GetPengumumanController);
+Router.post(
+  '/api/pengumuman/:pendaftaranId',
+  PengumumanController.CreatePengumumanController,
+);
+Router.get(
+  '/api/pengumuman/user',
+  PengumumanController.GetPengumumanByUserController,
 );
 
 export { Router };
