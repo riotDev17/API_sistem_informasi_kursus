@@ -413,8 +413,6 @@ const CreatePendaftaranService = async (users, request) => {
   pendaftaran.users_ID = users.id_user;
   pendaftaran.status_pendaftaran = 'Diproses';
 
-  console.log(pendaftaran);
-
   return prismaClient.pendaftaran.create({
     data: pendaftaran,
     select: {
