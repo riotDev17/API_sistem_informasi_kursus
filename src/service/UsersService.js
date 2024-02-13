@@ -127,6 +127,7 @@ const LoginUserService = async (request) => {
     return {
       username: usersData.username,
       email: usersData.email,
+      nama: usersData.nama,
       role: usersData.role,
       token: token,
     };
