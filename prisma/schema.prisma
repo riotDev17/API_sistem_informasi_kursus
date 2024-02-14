@@ -79,58 +79,58 @@ model Penghasilan {
   @@map("penghasilan")
 }
 
-model Provinsi {
-  id_provinsi   String        @id @default(uuid())
-  nama_provinsi String        @db.VarChar(50)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  Kabupaten     Kabupaten[]
-  Sekolah       Sekolah[]
-  Pendaftaran   Pendaftaran[]
+// model Provinsi {
+//   id_provinsi   String        @id @default(uuid())
+//   nama_provinsi String        @db.VarChar(50)
+//   createdAt     DateTime      @default(now())
+//   updatedAt     DateTime      @updatedAt
+//   Kabupaten     Kabupaten[]
+//   Sekolah       Sekolah[]
+//   Pendaftaran   Pendaftaran[]
 
-  @@map("provinsi")
-}
+//   @@map("provinsi")
+// }
 
-model Kabupaten {
-  id_kabupaten   String        @id @default(uuid())
-  nama_kabupaten String        @db.VarChar(50)
-  provinsi_ID    String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  provinsi       Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
-  Kecamatan      Kecamatan[]
-  Sekolah        Sekolah[]
-  Pendaftaran    Pendaftaran[]
+// model Kabupaten {
+//   id_kabupaten   String        @id @default(uuid())
+//   nama_kabupaten String        @db.VarChar(50)
+//   provinsi_ID    String
+//   createdAt      DateTime      @default(now())
+//   updatedAt      DateTime      @updatedAt
+//   provinsi       Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
+//   Kecamatan      Kecamatan[]
+//   Sekolah        Sekolah[]
+//   Pendaftaran    Pendaftaran[]
 
-  @@map("kabupaten")
-}
+//   @@map("kabupaten")
+// }
 
-model Kecamatan {
-  id_kecamatan   String        @id @default(uuid())
-  nama_kecamatan String        @db.VarChar(50)
-  kabupaten_ID   String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  kabupaten      Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
-  Kelurahan      Kelurahan[]
-  Sekolah        Sekolah[]
-  Pendaftaran    Pendaftaran[]
+// model Kecamatan {
+//   id_kecamatan   String        @id @default(uuid())
+//   nama_kecamatan String        @db.VarChar(50)
+//   kabupaten_ID   String
+//   createdAt      DateTime      @default(now())
+//   updatedAt      DateTime      @updatedAt
+//   kabupaten      Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
+//   Kelurahan      Kelurahan[]
+//   Sekolah        Sekolah[]
+//   Pendaftaran    Pendaftaran[]
 
-  @@map("kecamatan")
-}
+//   @@map("kecamatan")
+// }
 
-model Kelurahan {
-  id_kelurahan   String        @id @default(uuid())
-  nama_kelurahan String        @db.VarChar(50)
-  kecamatan_ID   String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  kecamatan      Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
-  Sekolah        Sekolah[]
-  Pendaftaran    Pendaftaran[]
+// model Kelurahan {
+//   id_kelurahan   String        @id @default(uuid())
+//   nama_kelurahan String        @db.VarChar(50)
+//   kecamatan_ID   String
+//   createdAt      DateTime      @default(now())
+//   updatedAt      DateTime      @updatedAt
+//   kecamatan      Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
+//   Sekolah        Sekolah[]
+//   Pendaftaran    Pendaftaran[]
 
-  @@map("kelurahan")
-}
+//   @@map("kelurahan")
+// }
 
 model Sekolah {
   id_sekolah         String        @id @default(uuid())
@@ -138,10 +138,10 @@ model Sekolah {
   nama_sekolah       String        @db.VarChar(50)
   alamat             String        @db.Text
   kode_pos           Int           @db.Integer
-  provinsi_ID        String
-  kabupaten_ID       String
-  kecamatan_ID       String
-  kelurahan_ID       String
+  provinsi           String        @db.VarChar(50)
+  kabupaten          String        @db.VarChar(50)
+  kecamatan          String        @db.VarChar(50)
+  kelurahan          String        @db.VarChar(50)
   status_sekolah     String        @db.VarChar(25)
   jenjang_pendidikan String        @db.VarChar(25)
   akreditasi         String        @db.VarChar(20)
@@ -149,10 +149,6 @@ model Sekolah {
   no_telepon_sekolah String        @db.VarChar(25)
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
-  provinsi           Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
-  kabupaten          Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
-  kecamatan          Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
-  kelurahan          Kelurahan     @relation(fields: [kelurahan_ID], references: [id_kelurahan])
   Pendaftaran        Pendaftaran[]
 
   @@map("sekolah")
@@ -215,10 +211,10 @@ model Pendaftaran {
   email               String       @db.VarChar(50)
   no_telepon          String       @db.VarChar(25)
   alamat              String       @db.Text
-  provinsi_ID         String
-  kabupaten_ID        String
-  kecamatan_ID        String
-  kelurahan_ID        String
+  provinsi            String       @db.VarChar(50)
+  kabupaten           String       @db.VarChar(50)
+  kecamatan           String       @db.VarChar(50)
+  kelurahan           String       @db.VarChar(50)
   nama_ayah           String       @db.VarChar(50)
   pekerjaan_ayah_ID   String
   no_telepon_ayah     String       @db.VarChar(25)
@@ -247,10 +243,6 @@ model Pendaftaran {
   kursus              Kursus       @relation(fields: [kursus_ID], references: [id_kursus])
   users               Users        @relation(fields: [users_ID], references: [id_users])
   agama               Agama        @relation(fields: [agama_ID], references: [id_agama])
-  provinsi            Provinsi     @relation(fields: [provinsi_ID], references: [id_provinsi])
-  kabupaten           Kabupaten    @relation(fields: [kabupaten_ID], references: [id_kabupaten])
-  kecamatan           Kecamatan    @relation(fields: [kecamatan_ID], references: [id_kecamatan])
-  kelurahan           Kelurahan    @relation(fields: [kelurahan_ID], references: [id_kelurahan])
   pekerjaan_ayah      Pekerjaan?   @relation("PekerjaanAyah", fields: [pekerjaan_ayah_ID], references: [id_pekerjaan])
   pekerjaan_ibu       Pekerjaan?   @relation("PekerjaanIbu", fields: [pekerjaan_ibu_ID], references: [id_pekerjaan])
   pendidikan_ayah     Pendidikan?  @relation(name: "PendidikanAyah", fields: [pendidikan_ayah_ID], references: [id_pendidikan])
