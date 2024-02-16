@@ -79,59 +79,6 @@ model Penghasilan {
   @@map("penghasilan")
 }
 
-// model Provinsi {
-//   id_provinsi   String        @id @default(uuid())
-//   nama_provinsi String        @db.VarChar(50)
-//   createdAt     DateTime      @default(now())
-//   updatedAt     DateTime      @updatedAt
-//   Kabupaten     Kabupaten[]
-//   Sekolah       Sekolah[]
-//   Pendaftaran   Pendaftaran[]
-
-//   @@map("provinsi")
-// }
-
-// model Kabupaten {
-//   id_kabupaten   String        @id @default(uuid())
-//   nama_kabupaten String        @db.VarChar(50)
-//   provinsi_ID    String
-//   createdAt      DateTime      @default(now())
-//   updatedAt      DateTime      @updatedAt
-//   provinsi       Provinsi      @relation(fields: [provinsi_ID], references: [id_provinsi])
-//   Kecamatan      Kecamatan[]
-//   Sekolah        Sekolah[]
-//   Pendaftaran    Pendaftaran[]
-
-//   @@map("kabupaten")
-// }
-
-// model Kecamatan {
-//   id_kecamatan   String        @id @default(uuid())
-//   nama_kecamatan String        @db.VarChar(50)
-//   kabupaten_ID   String
-//   createdAt      DateTime      @default(now())
-//   updatedAt      DateTime      @updatedAt
-//   kabupaten      Kabupaten     @relation(fields: [kabupaten_ID], references: [id_kabupaten])
-//   Kelurahan      Kelurahan[]
-//   Sekolah        Sekolah[]
-//   Pendaftaran    Pendaftaran[]
-
-//   @@map("kecamatan")
-// }
-
-// model Kelurahan {
-//   id_kelurahan   String        @id @default(uuid())
-//   nama_kelurahan String        @db.VarChar(50)
-//   kecamatan_ID   String
-//   createdAt      DateTime      @default(now())
-//   updatedAt      DateTime      @updatedAt
-//   kecamatan      Kecamatan     @relation(fields: [kecamatan_ID], references: [id_kecamatan])
-//   Sekolah        Sekolah[]
-//   Pendaftaran    Pendaftaran[]
-
-//   @@map("kelurahan")
-// }
-
 model Sekolah {
   id_sekolah         String        @id @default(uuid())
   npsn               Int           @db.Integer
