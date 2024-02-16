@@ -28,30 +28,10 @@ const GetPendaftaranService = async () => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -223,30 +203,10 @@ const GetPendaftaranByUserService = async (users) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -434,30 +394,10 @@ const CreatePendaftaranService = async (users, request) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -692,30 +632,10 @@ const UpdatePendaftaranService = async (users, request) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {

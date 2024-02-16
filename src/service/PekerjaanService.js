@@ -16,7 +16,7 @@ const GetPekerjaanService = async () => {
       nama_pekerjaan: true,
     },
     orderBy: {
-      nama_pekerjaan: 'desc',
+      createdAt: 'desc',
     },
   });
 };

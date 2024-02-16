@@ -17,39 +17,19 @@ const GetSekolahService = async () => {
       nama_sekolah: true,
       alamat: true,
       kode_pos: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       status_sekolah: true,
       jenjang_pendidikan: true,
       akreditasi: true,
       email_sekolah: true,
       no_telepon_sekolah: true,
     },
-    orderBy:{
+    orderBy: {
       createdAt: 'desc',
-    }
+    },
   });
 };
 
@@ -74,30 +54,10 @@ const CreateSekolahService = async (request) => {
       nama_sekolah: true,
       alamat: true,
       kode_pos: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       status_sekolah: true,
       jenjang_pendidikan: true,
       akreditasi: true,
@@ -120,30 +80,10 @@ const GetSekolahByIdService = async (sekolahId) => {
       nama_sekolah: true,
       alamat: true,
       kode_pos: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       status_sekolah: true,
       jenjang_pendidikan: true,
       akreditasi: true,
@@ -183,30 +123,10 @@ const UpdateSekolahService = async (request) => {
       nama_sekolah: true,
       alamat: true,
       kode_pos: true,
-      provinsi: {
-        select: {
-          id_provinsi: true,
-          nama_provinsi: true,
-        },
-      },
-      kabupaten: {
-        select: {
-          id_kabupaten: true,
-          nama_kabupaten: true,
-        },
-      },
-      kecamatan: {
-        select: {
-          id_kecamatan: true,
-          nama_kecamatan: true,
-        },
-      },
-      kelurahan: {
-        select: {
-          id_kelurahan: true,
-          nama_kelurahan: true,
-        },
-      },
+      provinsi: true,
+      kabupaten: true,
+      kecamatan: true,
+      kelurahan: true,
       status_sekolah: true,
       jenjang_pendidikan: true,
       akreditasi: true,
