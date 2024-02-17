@@ -89,8 +89,9 @@ const UpdatePengajarController = async (req, res, next) => {
       const request = req.body;
       request.id_pengajar = pengajarId;
 
-      if (req.files['foto_pengajar'] && req.files['sertifikat_pengajar']) {
+      if (req.files['foto_pengajar']) {
         request.foto_pengajar = req.files['foto_pengajar'][0].path;
+      } else if (req.files['sertifikat_pengajar']) {
         request.sertifikat_pengajar = req.files['sertifikat_pengajar'][0].path;
       }
 
