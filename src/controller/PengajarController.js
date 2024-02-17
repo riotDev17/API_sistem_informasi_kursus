@@ -96,7 +96,7 @@ const UpdatePengajarController = async (req, res, next) => {
 
       try {
         const result = await PengajarService.UpdatePengajarService(request);
-        res.status(201).json({
+        res.status(200).json({
           status: 'Success',
           message: 'Berhasil Mengupdate Data Pengajar!',
           data: result,
