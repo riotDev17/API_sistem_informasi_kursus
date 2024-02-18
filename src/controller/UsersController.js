@@ -58,6 +58,20 @@ const GetUserController = async (req, res, next) => {
   }
 };
 
+// GET ALL
+const GetAllUserController = async (req, res, next) => {
+  try {
+    const result = await UsersService.GetAllUserService();
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil menampilkan semua data users!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // UPDATE
 const UpdateUserController = async (req, res, next) => {
   try {
@@ -114,6 +128,7 @@ export default {
   VerifikasiUserController,
   LoginUserController,
   GetUserController,
+  GetAllUserController,
   UpdateUserController,
   LogoutUserController,
 };
