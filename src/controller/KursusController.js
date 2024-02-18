@@ -96,7 +96,7 @@ const UpdateKursusController = async (req, res, next) => {
 
       try {
         const result = await KursusService.UpdateKursusService(request);
-        res.status(201).json({
+        res.status(200).json({
           status: 'SUCCESS',
           message: 'Berhasil mengupdate data kursus!',
           data: result,
