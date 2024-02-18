@@ -196,6 +196,39 @@ const GetAllUserService = async () => {
   return users;
 };
 
+// GET BY ID
+const GetUserByIdService = async (usersId) => {
+  usersId = Validation(GetUsersValidation, usersId);
+  const users = await prismaClient.users.findFirst({
+    where: {
+      id_users: usersId,
+    },
+    select: {
+      id_users: true,
+      nama: true,
+      email: true,
+      username: true,
+      role: true,
+      verifikasi_email: true,
+      tanggal_verifikasi_email: true,
+      foto_profil: true,
+      tempat_lahir: true,
+      tanggal_lahir: true,
+      jenis_kelamin: true,
+      no_telepon: true,
+      alamat: true,
+      instagram: true,
+      whatsapp: true,
+    },
+  });
+
+  if (!users) {
+    throw new ResponseError(404, 'User tidak ditemukan!');
+  }
+
+  return users;
+};
+
 // UPDATE
 const UpdateUserService = async (request) => {
   const users = await Validation(UpdateUserValidation, request);
@@ -256,6 +289,7 @@ export default {
   LoginUserService,
   GetUserService,
   GetAllUserService,
+  GetUserByIdService,
   UpdateUserService,
   LogoutUserService,
 };

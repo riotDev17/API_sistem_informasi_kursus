@@ -18,6 +18,7 @@ Router.use(AuthMiddleware);
 // USERS
 Router.get('/api/users', UsersController.GetUserController);
 Router.get('/api/users/all', UsersController.GetAllUserController);
+Router.get('/api/users/:userId', UsersController.GetUserByIdController);
 Router.delete('/api/users/logout', UsersController.LogoutUserController);
 Router.put('/api/users/:userId', UsersController.UpdateUserController);
 
