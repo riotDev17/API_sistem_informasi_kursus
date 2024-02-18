@@ -127,7 +127,7 @@ model Kursus {
   jam_selesai      String        @db.VarChar(50)
   tanggal_mulai    String        @db.VarChar(50)
   tanggal_selesai  String        @db.VarChar(50)
-  hari_kursus      String        @db.VarChar(50)
+  hari_kursus      String[]      @db.VarChar(50)
   harga_kursus     Int           @db.Integer
   foto_kursus      String        @db.Text
   syarat_kursus    String        @db.Text
