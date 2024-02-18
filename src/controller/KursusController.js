@@ -88,14 +88,15 @@ const UpdateKursusController = async (req, res, next) => {
       const { kursusId } = req.params;
       const request = req.body;
       request.id_kursus = kursusId;
-      if (req.files['foto_kursus'] && req.files['modul_kursus']) {
+      if (req.files['foto_kursus']) {
         request.foto_kursus = req.files['foto_kursus'][0].path;
+      } else if (req.files['modul_kursus']) {
         request.modul_kursus = req.files['modul_kursus'][0].path;
       }
 
       try {
         const result = await KursusService.UpdateKursusService(request);
-        res.status(201).json({
+        res.status(200).json({
           status: 'SUCCESS',
           message: 'Berhasil mengupdate data kursus!',
           data: result,

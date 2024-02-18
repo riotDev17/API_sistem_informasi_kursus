@@ -58,6 +58,35 @@ const GetUserController = async (req, res, next) => {
   }
 };
 
+// GET ALL
+const GetAllUserController = async (req, res, next) => {
+  try {
+    const result = await UsersService.GetAllUserService();
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil menampilkan semua data users!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET BY ID
+const GetUserByIdController = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const result = await UsersService.GetUserByIdService(userId);
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil menampilkan data user!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // UPDATE
 const UpdateUserController = async (req, res, next) => {
   try {
@@ -114,6 +143,8 @@ export default {
   VerifikasiUserController,
   LoginUserController,
   GetUserController,
+  GetAllUserController,
+  GetUserByIdController,
   UpdateUserController,
   LogoutUserController,
 };

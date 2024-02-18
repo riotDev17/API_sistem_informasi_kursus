@@ -8,9 +8,8 @@ const CreatePengajarValidation = Joi.object({
   gelar_pengajar: Joi.string().max(50).required(),
   keahlian_pengajar: Joi.string().required(),
   pengalaman_pengajar: Joi.string().required(),
-  biodata_pengajar: Joi.string().required(),
-  foto_pengajar: Joi.string().required(),
-  sertifikat_pengajar: Joi.string().required(),
+  foto_pengajar: Joi.string().optional(),
+  sertifikat_pengajar: Joi.string().optional(),
 });
 
 const UpdatePengajarValidation = Joi.object({
@@ -20,9 +19,8 @@ const UpdatePengajarValidation = Joi.object({
   gelar_pengajar: Joi.string().max(50).required(),
   keahlian_pengajar: Joi.string().required(),
   pengalaman_pengajar: Joi.string().required(),
-  biodata_pengajar: Joi.string().required(),
-  foto_pengajar: Joi.string().required(),
-  sertifikat_pengajar: Joi.string().required(),
+  foto_pengajar: Joi.string().optional(),
+  sertifikat_pengajar: Joi.string().optional(),
 });
 
 const DeletePengajarValidation = Joi.string().max(100).required();

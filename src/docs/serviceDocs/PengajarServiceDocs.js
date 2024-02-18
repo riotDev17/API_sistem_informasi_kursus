@@ -27,8 +27,6 @@
  *                 type: string
  *               pengalaman_pengajar:
  *                 type: string
- *               biodata_pengajar:
- *                 type: string
  *               foto_pengajar:
  *                 type: string
  *               sertifikat_pengajar:
@@ -49,7 +47,6 @@
  *         - gelar_pengajar
  *         - keahlian_pengajar
  *         - pengalaman_pengajar
- *         - biodata_pengajar
  *         - foto_pengajar
  *         - sertifikat_pengajar
  *       properties:
@@ -62,8 +59,6 @@
  *         keahlian_pengajar:
  *           type: string
  *         pengalaman_pengajar:
- *           type: string
- *         biodata_pengajar:
  *           type: string
  *         foto_pengajar:
  *           type: file
@@ -90,8 +85,6 @@
  *             keahlian_pengajar:
  *               type: string
  *             pengalaman_pengajar:
- *               type: string
- *             biodata_pengajar:
  *               type: string
  *             foto_pengajar:
  *               type: string
@@ -128,8 +121,6 @@
  *               type: string
  *             pengalaman_pengajar:
  *               type: string
- *             biodata_pengajar:
- *               type: string
  *             foto_pengajar:
  *               type: string
  *             sertifikat_pengajar:
@@ -150,7 +141,6 @@
  *         - gelar_pengajar
  *         - keahlian_pengajar
  *         - pengalaman_pengajar
- *         - biodata_pengajar
  *         - foto_pengajar
  *         - sertifikat_pengajar
  *       properties:
@@ -163,8 +153,6 @@
  *         keahlian_pengajar:
  *           type: string
  *         pengalaman_pengajar:
- *           type: string
- *         biodata_pengajar:
  *           type: string
  *         foto_pengajar:
  *           type: file
@@ -191,8 +179,6 @@
  *             keahlian_pengajar:
  *               type: string
  *             pengalaman_pengajar:
- *               type: string
- *             biodata_pengajar:
  *               type: string
  *             foto_pengajar:
  *               type: string
