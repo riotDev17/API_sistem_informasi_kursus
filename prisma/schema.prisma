@@ -157,10 +157,6 @@ model Pendaftaran {
   email               String       @db.VarChar(50)
   no_telepon          String       @db.VarChar(25)
   alamat              String       @db.Text
-  provinsi            String       @db.VarChar(50)
-  kabupaten           String       @db.VarChar(50)
-  kecamatan           String       @db.VarChar(50)
-  kelurahan           String       @db.VarChar(50)
   nama_ayah           String       @db.VarChar(50)
   pekerjaan_ayah_ID   String
   no_telepon_ayah     String       @db.VarChar(25)
