@@ -28,10 +28,6 @@ const GetPendaftaranService = async () => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: true,
-      kabupaten: true,
-      kecamatan: true,
-      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -81,30 +77,6 @@ const GetPendaftaranService = async () => {
           nama_sekolah: true,
           alamat: true,
           kode_pos: true,
-          provinsi: {
-            select: {
-              id_provinsi: true,
-              nama_provinsi: true,
-            },
-          },
-          kabupaten: {
-            select: {
-              id_kabupaten: true,
-              nama_kabupaten: true,
-            },
-          },
-          kecamatan: {
-            select: {
-              id_kecamatan: true,
-              nama_kecamatan: true,
-            },
-          },
-          kelurahan: {
-            select: {
-              id_kelurahan: true,
-              nama_kelurahan: true,
-            },
-          },
           status_sekolah: true,
           jenjang_pendidikan: true,
           akreditasi: true,
@@ -134,7 +106,6 @@ const GetPendaftaranService = async () => {
               gelar_pengajar: true,
               keahlian_pengajar: true,
               pengalaman_pengajar: true,
-              biodata_pengajar: true,
               foto_pengajar: true,
               sertifikat_pengajar: true,
             },
@@ -203,10 +174,6 @@ const GetPendaftaranByUserService = async (users) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: true,
-      kabupaten: true,
-      kecamatan: true,
-      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -256,30 +223,6 @@ const GetPendaftaranByUserService = async (users) => {
           nama_sekolah: true,
           alamat: true,
           kode_pos: true,
-          provinsi: {
-            select: {
-              id_provinsi: true,
-              nama_provinsi: true,
-            },
-          },
-          kabupaten: {
-            select: {
-              id_kabupaten: true,
-              nama_kabupaten: true,
-            },
-          },
-          kecamatan: {
-            select: {
-              id_kecamatan: true,
-              nama_kecamatan: true,
-            },
-          },
-          kelurahan: {
-            select: {
-              id_kelurahan: true,
-              nama_kelurahan: true,
-            },
-          },
           status_sekolah: true,
           jenjang_pendidikan: true,
           akreditasi: true,
@@ -309,7 +252,6 @@ const GetPendaftaranByUserService = async (users) => {
               gelar_pengajar: true,
               keahlian_pengajar: true,
               pengalaman_pengajar: true,
-              biodata_pengajar: true,
               foto_pengajar: true,
               sertifikat_pengajar: true,
             },
@@ -394,10 +336,6 @@ const CreatePendaftaranService = async (users, request) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: true,
-      kabupaten: true,
-      kecamatan: true,
-      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -447,30 +385,6 @@ const CreatePendaftaranService = async (users, request) => {
           nama_sekolah: true,
           alamat: true,
           kode_pos: true,
-          provinsi: {
-            select: {
-              id_provinsi: true,
-              nama_provinsi: true,
-            },
-          },
-          kabupaten: {
-            select: {
-              id_kabupaten: true,
-              nama_kabupaten: true,
-            },
-          },
-          kecamatan: {
-            select: {
-              id_kecamatan: true,
-              nama_kecamatan: true,
-            },
-          },
-          kelurahan: {
-            select: {
-              id_kelurahan: true,
-              nama_kelurahan: true,
-            },
-          },
           status_sekolah: true,
           jenjang_pendidikan: true,
           akreditasi: true,
@@ -500,7 +414,6 @@ const CreatePendaftaranService = async (users, request) => {
               gelar_pengajar: true,
               keahlian_pengajar: true,
               pengalaman_pengajar: true,
-              biodata_pengajar: true,
               foto_pengajar: true,
               sertifikat_pengajar: true,
             },
@@ -632,10 +545,6 @@ const UpdatePendaftaranService = async (users, request) => {
       email: true,
       no_telepon: true,
       alamat: true,
-      provinsi: true,
-      kabupaten: true,
-      kecamatan: true,
-      kelurahan: true,
       nama_ayah: true,
       pekerjaan_ayah: {
         select: {
@@ -685,30 +594,6 @@ const UpdatePendaftaranService = async (users, request) => {
           nama_sekolah: true,
           alamat: true,
           kode_pos: true,
-          provinsi: {
-            select: {
-              id_provinsi: true,
-              nama_provinsi: true,
-            },
-          },
-          kabupaten: {
-            select: {
-              id_kabupaten: true,
-              nama_kabupaten: true,
-            },
-          },
-          kecamatan: {
-            select: {
-              id_kecamatan: true,
-              nama_kecamatan: true,
-            },
-          },
-          kelurahan: {
-            select: {
-              id_kelurahan: true,
-              nama_kelurahan: true,
-            },
-          },
           status_sekolah: true,
           jenjang_pendidikan: true,
           akreditasi: true,
@@ -738,7 +623,6 @@ const UpdatePendaftaranService = async (users, request) => {
               gelar_pengajar: true,
               keahlian_pengajar: true,
               pengalaman_pengajar: true,
-              biodata_pengajar: true,
               foto_pengajar: true,
               sertifikat_pengajar: true,
             },
