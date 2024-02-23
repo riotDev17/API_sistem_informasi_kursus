@@ -24,10 +24,10 @@ const UpdateUserValidation = Joi.object({
   tempat_lahir: Joi.string().required(),
   tanggal_lahir: Joi.string().max(50).required(),
   jenis_kelamin: Joi.string().max(50).required(),
-  no_telepon: Joi.string().max(25).required(),
+  no_telepon: Joi.string().max(25).optional(),
   alamat: Joi.string().required(),
-  instagram: Joi.string().required(),
-  whatsapp: Joi.string().max(25).required(),
+  instagram: Joi.string().optional(),
+  whatsapp: Joi.string().max(25).optional(),
 });
 
 const GetUsersValidation = Joi.string().max(100);
