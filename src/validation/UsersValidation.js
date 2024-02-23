@@ -26,8 +26,8 @@ const UpdateUserValidation = Joi.object({
   jenis_kelamin: Joi.string().max(50).required(),
   no_telepon: Joi.string().max(25).optional(),
   alamat: Joi.string().required(),
-  instagram: Joi.string().optional(),
-  whatsapp: Joi.string().max(25).optional(),
+  instagram: Joi.string().required(),
+  whatsapp: Joi.string().max(25).required(),
 });
 
 const GetUsersValidation = Joi.string().max(100);
