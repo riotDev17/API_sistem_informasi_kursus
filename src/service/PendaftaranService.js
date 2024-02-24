@@ -151,7 +151,7 @@ const GetPendaftaranService = async () => {
 
 // GET BY USERS
 const GetPendaftaranByUserService = async (users) => {
-  const pendaftaran = await prismaClient.pendaftaran.findFirst({
+  const pendaftaran = await prismaClient.pendaftaran.findMany({
     where: {
       users_ID: users.id_user,
     },
