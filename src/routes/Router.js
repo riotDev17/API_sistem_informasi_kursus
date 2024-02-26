@@ -129,7 +129,10 @@ Router.get(
   '/api/pendaftaran/user',
   PendaftaranController.GetPendaftaranByUserController,
 );
-
+Router.get(
+  '/api/pendaftaran/:pendaftaranId',
+  PendaftaranController.GetPendaftaranByIdController,
+);
 Router.put(
   '/api/pendaftaran/verify/:pendaftaranId',
   PendaftaranController.ChangeStatusPendaftaranVerifyController,

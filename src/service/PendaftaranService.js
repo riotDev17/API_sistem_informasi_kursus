@@ -298,6 +298,155 @@ const GetPendaftaranByUserService = async (users) => {
   return pendaftaran;
 };
 
+// GET BY ID
+const GetPendaftaranByIdService = async (pendaftaranId) => {
+  const pendaftaran = await prismaClient.pendaftaran.findFirst({
+    where: {
+      id_pendaftaran: pendaftaranId,
+    },
+    select: {
+      id_pendaftaran: true,
+      nisn: true,
+      nis: true,
+      nik: true,
+      nama_lengkap: true,
+      jenis_kelamin: true,
+      pas_foto: true,
+      tempat_lahir: true,
+      tanggal_lahir: true,
+      agama: {
+        select: {
+          id_agama: true,
+          nama_agama: true,
+        },
+      },
+      email: true,
+      no_telepon: true,
+      alamat: true,
+      nama_ayah: true,
+      pekerjaan_ayah: {
+        select: {
+          id_pekerjaan: true,
+          nama_pekerjaan: true,
+        },
+      },
+      no_telepon_ayah: true,
+      pendidikan_ayah: {
+        select: {
+          id_pendidikan: true,
+          nama_pendidikan: true,
+        },
+      },
+      penghasilan_ayah: {
+        select: {
+          id_penghasilan: true,
+          jumlah_penghasilan: true,
+        },
+      },
+      nama_ibu: true,
+      pekerjaan_ibu: {
+        select: {
+          id_pekerjaan: true,
+          nama_pekerjaan: true,
+        },
+      },
+      no_telepon_ibu: true,
+      pendidikan_ibu: {
+        select: {
+          id_pendidikan: true,
+          nama_pendidikan: true,
+        },
+      },
+      penghasilan_ibu: {
+        select: {
+          id_penghasilan: true,
+          jumlah_penghasilan: true,
+        },
+      },
+      slip_gaji_ayah_ibu: true,
+      foto_kk: true,
+      sekolah: {
+        select: {
+          id_sekolah: true,
+          npsn: true,
+          nama_sekolah: true,
+          alamat: true,
+          kode_pos: true,
+          status_sekolah: true,
+          jenjang_pendidikan: true,
+          akreditasi: true,
+          email_sekolah: true,
+          no_telepon_sekolah: true,
+        },
+      },
+      nilai_semester_1: true,
+      nilai_semester_2: true,
+      nilai_semester_3: true,
+      nilai_semester_4: true,
+      nilai_semester_5: true,
+      nilai_semester_6: true,
+      raport: true,
+      prestasi: true,
+      kursus: {
+        select: {
+          id_kursus: true,
+          nama_kursus: true,
+          topik_kursus: true,
+          jenjang_kursus: true,
+          pengajar: {
+            select: {
+              id_pengajar: true,
+              nama_pengajar: true,
+              no_telepon_pengajar: true,
+              gelar_pengajar: true,
+              keahlian_pengajar: true,
+              pengalaman_pengajar: true,
+              foto_pengajar: true,
+              sertifikat_pengajar: true,
+            },
+          },
+          jam_mulai: true,
+          jam_selesai: true,
+          tanggal_mulai: true,
+          tanggal_selesai: true,
+          hari_kursus: true,
+          harga_kursus: true,
+          foto_kursus: true,
+          syarat_kursus: true,
+          deskripsi_kursus: true,
+          modul_kursus: true,
+        },
+      },
+      users: {
+        select: {
+          id_users: true,
+          nama: true,
+          email: true,
+          username: true,
+          role: true,
+          verifikasi_email: true,
+          tanggal_verifikasi_email: true,
+          foto_profil: true,
+          tempat_lahir: true,
+          tanggal_lahir: true,
+          jenis_kelamin: true,
+          no_telepon: true,
+          alamat: true,
+          instagram: true,
+          whatsapp: true,
+        },
+      },
+      status_pendaftaran: true,
+    },
+  });
+
+  if (!pendaftaran) {
+    throw new ResponseError(404, 'Pendaftaran Tidak Ditemukan!');
+  }
+
+  return pendaftaran;
+};
+
 // CREATE
 const CreatePendaftaranService = async (users, request) => {
   const existingPendaftaran = await prismaClient.pendaftaran.findFirst({
@@ -686,6 +835,7 @@ export default {
   GetPendaftaranService,
   CreatePendaftaranService,
   GetPendaftaranByUserService,
+  GetPendaftaranByIdService,
   ChangeStatusPendaftaranVerifyService,
   ChangeStatusPendaftaranRejectService,
   UpdatePendaftaranService,
