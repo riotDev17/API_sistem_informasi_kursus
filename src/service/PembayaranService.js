@@ -12,6 +12,7 @@ const GetPembayaranService = async () => {
         select: {
           id_pendaftaran: true,
           nama_lengkap: true,
+          email: true,
           kursus: {
             select: {
               nama_kursus: true,
