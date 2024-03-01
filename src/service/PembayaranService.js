@@ -15,6 +15,7 @@ const GetPembayaranService = async () => {
           email: true,
           kursus: {
             select: {
+              id_kursus: true,
               nama_kursus: true,
             },
           },
@@ -22,6 +23,7 @@ const GetPembayaranService = async () => {
       },
       bukti_pembayaran: true,
       status_pembayaran: true,
+      createdAt: true,
     },
   });
 };
