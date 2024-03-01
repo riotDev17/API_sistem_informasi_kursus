@@ -156,19 +156,20 @@ const UpdatePendaftaranController = async (req, res, next) => {
       const users = req.users;
       const request = req.body;
       request.id_pendaftaran = pendaftaranId;
-      if (
-        req.files['pas_foto'] &&
-        req.files['slip_gaji_ayah_ibu'] &&
-        req.files['foto_kk'] &&
-        req.files['raport'] &&
-        req.files['prestasi']
-      ) {
-        request.pas_foto = req.files['pas_foto'][0].path;
-        request.slip_gaji_ayah_ibu = req.files['slip_gaji_ayah_ibu'][0].path;
-        request.foto_kk = req.files['foto_kk'][0].path;
-        request.raport = req.files['raport'][0].path;
-        request.prestasi = req.files['prestasi'][0].path;
-      }
+      const fileFields = [
+        'pas_foto',
+        'slip_gaji_ayah_ibu',
+        'foto_kk',
+        'raport',
+        'prestasi',
+      ];
+
+      fileFields.forEach((field) => {
+        if (req.files[field]) {
+          request[field] = req.files[field][0].path;
+          return;
+        }
+      });
 
       try {
         const result = await PendaftaranService.UpdatePendaftaranService(
