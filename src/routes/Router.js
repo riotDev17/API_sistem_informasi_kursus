@@ -152,6 +152,10 @@ Router.delete(
 
 // PEMBAYARAN
 Router.get('/api/pembayaran', PembayaranController.GetPembayaranController);
+Router.get(
+  '/api/pembayaran/:pembayaranId',
+  PembayaranController.GetPembayaranByIdController,
+);
 Router.post(
   '/api/pembayaran/:pendaftaranId',
   PembayaranController.CreatePembayaranController,

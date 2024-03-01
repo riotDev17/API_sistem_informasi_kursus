@@ -28,6 +28,40 @@ const GetPembayaranService = async () => {
   });
 };
 
+// GET BY ID
+const GetPembayaranByIdService = async (pembayaranId) => {
+  const pembayaran = await prismaClient.pembayaran.findUnique({
+    where: {
+      id_pembayaran: pembayaranId,
+    },
+    select: {
+      id_pembayaran: true,
+      pendaftaran: {
+        select: {
+          id_pendaftaran: true,
+          nama_lengkap: true,
+          email: true,
+          kursus: {
+            select: {
+              id_kursus: true,
+              nama_kursus: true,
+            },
+          },
+        },
+      },
+      bukti_pembayaran: true,
+      status_pembayaran: true,
+      createdAt: true,
+    },
+  });
+
+  if (!pembayaran) {
+    throw new ResponseError(404, 'Pembayaran Tidak Ditemukan!');
+  }
+
+  return pembayaran;
+};
+
 // CREATE
 const CreatePembayaranService = async (request) => {
   const pembayaran = await Validation(CreatePembayaranValidation, request);
@@ -110,6 +144,7 @@ const ChangeStatusPembayaranRejectService = async (pembayaranId) => {
 export default {
   GetPembayaranService,
   CreatePembayaranService,
+  GetPembayaranByIdService,
   ChangeStatusPembayaranVerifyService,
   ChangeStatusPembayaranRejectService,
 };
