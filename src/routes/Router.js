@@ -156,6 +156,10 @@ Router.get(
   '/api/pembayaran/:pembayaranId',
   PembayaranController.GetPembayaranByIdController,
 );
+Router.get(
+  '/api/pembayaran/user',
+  PembayaranController.GetPembayaranByUserController,
+);
 Router.post(
   '/api/pembayaran/:pendaftaranId',
   PembayaranController.CreatePembayaranController,
