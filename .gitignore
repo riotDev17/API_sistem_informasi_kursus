@@ -4,5 +4,4 @@ assets
 .idea
 
 # Local env files
-.env
 .vscode

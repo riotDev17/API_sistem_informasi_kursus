@@ -129,7 +129,10 @@ Router.get(
   '/api/pendaftaran/user',
   PendaftaranController.GetPendaftaranByUserController,
 );
-
+Router.get(
+  '/api/pendaftaran/:pendaftaranId',
+  PendaftaranController.GetPendaftaranByIdController,
+);
 Router.put(
   '/api/pendaftaran/verify/:pendaftaranId',
   PendaftaranController.ChangeStatusPendaftaranVerifyController,
@@ -149,6 +152,15 @@ Router.delete(
 
 // PEMBAYARAN
 Router.get('/api/pembayaran', PembayaranController.GetPembayaranController);
+Router.get(
+  '/api/pembayaran/user',
+  PembayaranController.GetPembayaranByUserController,
+);
+Router.get(
+  '/api/pembayaran/:pembayaranId',
+  PembayaranController.GetPembayaranByIdController,
+);
+
 Router.post(
   '/api/pembayaran/:pendaftaranId',
   PembayaranController.CreatePembayaranController,
@@ -164,13 +176,13 @@ Router.put(
 
 // PENGUMUMAN
 Router.get('/api/pengumuman', PengumumanController.GetPengumumanController);
-Router.post(
-  '/api/pengumuman/:pendaftaranId',
-  PengumumanController.CreatePengumumanController,
-);
+Router.post('/api/pengumuman', PengumumanController.CreatePengumumanController);
 Router.get(
-  '/api/pengumuman/user',
-  PengumumanController.GetPengumumanByUserController,
+  '/api/pengumuman/:pengumumanId',
+  PengumumanController.GetPengumumanByIdController,
 );
-
+Router.put(
+  '/api/pengumuman/:pengumumanId',
+  PengumumanController.UpdatePengumumanController,
+);
 export { Router };

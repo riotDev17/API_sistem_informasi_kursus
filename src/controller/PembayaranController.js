@@ -16,6 +16,37 @@ const GetPembayaranController = async (req, res, next) => {
   }
 };
 
+// GET BY ID
+const GetPembayaranByIdController = async (req, res, next) => {
+  try {
+    const { pembayaranId } = req.params;
+    const result =
+      await PembayaranService.GetPembayaranByIdService(pembayaranId);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Berhasil Mendapatkan Data Pembayaran By Id!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET BY USER
+const GetPembayaranByUserController = async (req, res, next) => {
+  try {
+    const users = req.users;
+    const result = await PembayaranService.GetPembayaranByUserService(users);
+    res.status(200).json({
+      status: 'Success',
+      message: 'Berhasil Mendapatkan Data Pembayaran By Users!',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // CREATE
 const CreatePembayaranController = async (req, res, next) => {
   try {
@@ -31,13 +62,17 @@ const CreatePembayaranController = async (req, res, next) => {
 
       const { pendaftaranId } = req.params;
       const request = req.body;
+      const users = req.users;
       request.pendaftaran_ID = pendaftaranId;
       if (req.file) {
         request.bukti_pembayaran = req.file.path;
       }
 
       try {
-        const result = await PembayaranService.CreatePembayaranService(request);
+        const result = await PembayaranService.CreatePembayaranService(
+          users,
+          request,
+        );
         res.status(201).json({
           status: 'Success',
           message: 'Berhasil Mengirimkan Bukti Pembayaran!',
@@ -83,6 +118,8 @@ const ChangeStatusPembayaranRejectController = async (req, res, next) => {
 export default {
   GetPembayaranController,
   CreatePembayaranController,
+  GetPembayaranByIdController,
+  GetPembayaranByUserController,
   ChangeStatusPembayaranVerifyController,
   ChangeStatusPembayaranRejectController,
 };

@@ -1,14 +1,30 @@
 import { Validation } from '../validation/Validation.js';
 import { prismaClient } from '../app/Database.js';
 import { ResponseError } from '../error/ResponseError.js';
-import { CreatePengumumanValidation } from '../validation/PengumumanValidation.js';
+import {
+  CreatePengumumanValidation,
+  GetPengumumanValidation,
+  UpdatePengumumanValidation,
+} from '../validation/PengumumanValidation.js';
 
 // GET
 const GetPengumumanService = async () => {
   return prismaClient.pengumuman.findMany({
     select: {
-      users_ID: true,
-      pendaftaran_ID: true,
+      id_pengumuman: true,
+      pendaftaran: {
+        select: {
+          id_pendaftaran: true,
+          nama_lengkap: true,
+          email: true,
+          kursus: {
+            select: {
+              id_kursus: true,
+              nama_kursus: true,
+            },
+          },
+        },
+      },
       nilai_test: true,
       nilai_interview: true,
       nilai_rata_rata: true,
@@ -20,8 +36,44 @@ const GetPengumumanService = async () => {
   });
 };
 
+// GET BY ID
+const GetPengumumanByIdService = async (pengumumanId) => {
+  pengumumanId = await Validation(GetPengumumanValidation, pengumumanId);
+  const pengumuman = await prismaClient.pengumuman.findFirst({
+    where: {
+      id_pengumuman: pengumumanId,
+    },
+    select: {
+      id_pengumuman: true,
+      pendaftaran: {
+        select: {
+          id_pendaftaran: true,
+          nama_lengkap: true,
+          email: true,
+          kursus: {
+            select: {
+              id_kursus: true,
+              nama_kursus: true,
+            },
+          },
+        },
+      },
+      nilai_test: true,
+      nilai_interview: true,
+      nilai_rata_rata: true,
+      hasil_pengumuman: true,
+    },
+  });
+
+  if (!pengumuman) {
+    throw new ResponseError(404, 'Pengumuman Tidak Ditemukan');
+  }
+
+  return pengumuman;
+};
+
 // CREATE
-const CreatePengumumanService = async (users, request) => {
+const CreatePengumumanService = async (request) => {
   const pengumuman = await Validation(CreatePengumumanValidation, request);
   const pendaftaranExist = await prismaClient.pendaftaran.findUnique({
     where: {
@@ -43,12 +95,23 @@ const CreatePengumumanService = async (users, request) => {
     throw new ResponseError(409, 'Pengumuman Sudah Dibuat!');
   }
 
-  pengumuman.users_ID = users?.id_user;
   return prismaClient.pengumuman.create({
     data: pengumuman,
     select: {
-      users_ID: true,
-      pendaftaran_ID: true,
+      id_pengumuman: true,
+      pendaftaran: {
+        select: {
+          id_pendaftaran: true,
+          nama_lengkap: true,
+          email: true,
+          kursus: {
+            select: {
+              id_kursus: true,
+              nama_kursus: true,
+            },
+          },
+        },
+      },
       nilai_test: true,
       nilai_interview: true,
       nilai_rata_rata: true,
@@ -57,15 +120,39 @@ const CreatePengumumanService = async (users, request) => {
   });
 };
 
-// GET PENGUMUMAN BY USERS
-const GetPengumumanByUserService = async (users) => {
-  return prismaClient.pengumuman.findMany({
+// UPDATE
+const UpdatePengumumanService = async (request) => {
+  const pengumuman = await Validation(UpdatePengumumanValidation, request);
+  const pengumumanExist = await prismaClient.pengumuman.count({
     where: {
-      users_ID: users.id_user,
+      id_pengumuman: pengumuman.id_pengumuman,
     },
+  });
+
+  if (pengumumanExist === 0) {
+    throw new ResponseError(404, 'Pengumuman Tidak Ditemukan!');
+  }
+
+  return prismaClient.pengumuman.update({
+    where: {
+      id_pengumuman: pengumuman.id_pengumuman,
+    },
+    data: pengumuman,
     select: {
-      users_ID: true,
-      pendaftaran_ID: true,
+      id_pengumuman: true,
+      pendaftaran: {
+        select: {
+          id_pendaftaran: true,
+          nama_lengkap: true,
+          email: true,
+          kursus: {
+            select: {
+              id_kursus: true,
+              nama_kursus: true,
+            },
+          },
+        },
+      },
       nilai_test: true,
       nilai_interview: true,
       nilai_rata_rata: true,
@@ -76,6 +163,7 @@ const GetPengumumanByUserService = async (users) => {
 
 export default {
   GetPengumumanService,
+  GetPengumumanByIdService,
   CreatePengumumanService,
-  GetPengumumanByUserService,
+  UpdatePengumumanService,
 };
