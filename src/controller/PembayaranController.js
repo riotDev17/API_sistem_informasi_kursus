@@ -24,7 +24,7 @@ const GetPembayaranByIdController = async (req, res, next) => {
       await PembayaranService.GetPembayaranByIdService(pembayaranId);
     res.status(200).json({
       status: 'Success',
-      message: 'Berhasil Mendapatkan Data Pembayaran!',
+      message: 'Berhasil Mendapatkan Data Pembayaran By Id!',
       data: result,
     });
   } catch (error) {

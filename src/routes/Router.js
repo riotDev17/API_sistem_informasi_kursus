@@ -153,13 +153,14 @@ Router.delete(
 // PEMBAYARAN
 Router.get('/api/pembayaran', PembayaranController.GetPembayaranController);
 Router.get(
-  '/api/pembayaran/:pembayaranId',
-  PembayaranController.GetPembayaranByIdController,
-);
-Router.get(
   '/api/pembayaran/user',
   PembayaranController.GetPembayaranByUserController,
 );
+Router.get(
+  '/api/pembayaran/:pembayaranId',
+  PembayaranController.GetPembayaranByIdController,
+);
+
 Router.post(
   '/api/pembayaran/:pendaftaranId',
   PembayaranController.CreatePembayaranController,

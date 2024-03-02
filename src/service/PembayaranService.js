@@ -36,7 +36,7 @@ const GetPembayaranService = async () => {
 
 // GET BY ID
 const GetPembayaranByIdService = async (pembayaranId) => {
-  const pembayaran = await prismaClient.pembayaran.findUnique({
+  const pembayaran = await prismaClient.pembayaran.findFirst({
     where: {
       id_pembayaran: pembayaranId,
     },
@@ -74,9 +74,9 @@ const GetPembayaranByIdService = async (pembayaranId) => {
   return pembayaran;
 };
 
-// GET PEMBAYARAN BY USER
+// GET BY USER
 const GetPembayaranByUserService = async (users) => {
-  return prismaClient.pembayaran.findMany({
+  const pembayaran = await prismaClient.pembayaran.findMany({
     where: {
       users_ID: users.id_user,
     },
@@ -95,11 +95,23 @@ const GetPembayaranByUserService = async (users) => {
           },
         },
       },
+      users: {
+        select: {
+          id_users: true,
+          username: true,
+        },
+      },
       bukti_pembayaran: true,
       status_pembayaran: true,
       createdAt: true,
     },
   });
+
+  if (!pembayaran) {
+    throw new ResponseError(404, 'test Pembayaran Tidak Ditemukan!');
+  }
+
+  return pembayaran;
 };
 
 // CREATE
