@@ -14,17 +14,29 @@ const GetPengumumanController = async (req, res, next) => {
   }
 };
 
+// GET BY ID
+const GetPengumumanByIdController = async (req, res, next) => {
+  try {
+    const { pengumumanId } = req.params;
+    const result =
+      await PengumumanService.GetPengumumanByIdService(pengumumanId);
+    res.status(200).json({
+      status: 'SUCCESS',
+      message: 'Berhasil mendapatkan pengumuman By ID',
+      data: result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 // CREATE
 const CreatePengumumanController = async (req, res, next) => {
   try {
-    const { pendaftaranId } = req.params;
-    const users = req.users;
+    // const { pendaftaranId } = req.params;
     const request = req.body;
-    request.pendaftaran_ID = pendaftaranId;
-    const result = await PengumumanService.CreatePengumumanService(
-      users,
-      request,
-    );
+    // request.pendaftaran_ID = pendaftaranId;
+    const result = await PengumumanService.CreatePengumumanService(request);
     res.status(201).json({
       status: 'SUCCESS',
       message: 'Pengumuman berhasil dibuat',
@@ -35,14 +47,16 @@ const CreatePengumumanController = async (req, res, next) => {
   }
 };
 
-// GET PENGUMUMAN BY USER
-const GetPengumumanByUserController = async (req, res, next) => {
+// UPDATE PENGUMUMAN
+const UpdatePengumumanController = async (req, res, next) => {
   try {
-    const users = req.users;
-    const result = await PengumumanService.GetPengumumanByUserService(users);
+    const { pengumumanId } = req.params;
+    const request = req.body;
+    request.id_pengumuman = pengumumanId;
+    const result = await PengumumanService.UpdatePengumumanService(request);
     res.status(200).json({
       status: 'SUCCESS',
-      message: 'Berhasil mendapatkan pengumuman',
+      message: 'Pengumuman berhasil diupdate',
       data: result,
     });
   } catch (error) {
@@ -52,6 +66,7 @@ const GetPengumumanByUserController = async (req, res, next) => {
 
 export default {
   GetPengumumanController,
+  GetPengumumanByIdController,
   CreatePengumumanController,
-  GetPengumumanByUserController,
+  UpdatePengumumanController,
 };

@@ -10,4 +10,17 @@ const CreatePengumumanValidation = Joi.object({
   hasil_pengumuman: Joi.string().max(50).required(),
 });
 
-export { GetPengumumanValidation, CreatePengumumanValidation };
+const UpdatePengumumanValidation = Joi.object({
+  id_pengumuman: Joi.string().required(),
+  pendaftaran_ID: Joi.string().required(),
+  nilai_test: Joi.number().required(),
+  nilai_interview: Joi.number().required(),
+  nilai_rata_rata: Joi.number().required(),
+  hasil_pengumuman: Joi.string().max(50).required(),
+});
+
+export {
+  UpdatePengumumanValidation,
+  GetPengumumanValidation,
+  CreatePengumumanValidation,
+};
