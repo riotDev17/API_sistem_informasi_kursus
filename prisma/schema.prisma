@@ -32,7 +32,6 @@ model Users {
   updatedAt                DateTime      @updatedAt
   Pembayaran               Pembayaran[]
   Pendaftaran              Pendaftaran[]
-  Pengumuman               Pengumuman[]
 
   @@map("users")
 }
@@ -216,14 +215,12 @@ model Pembayaran {
 model Pengumuman {
   id_pengumuman    String      @id @default(uuid())
   pendaftaran_ID   String
-  users_ID         String
   hasil_pengumuman String      @db.VarChar(50)
   nilai_test       Int         @db.Integer
   nilai_interview  Int         @db.Integer
   nilai_rata_rata  Int         @db.Integer
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
-  users            Users       @relation(fields: [users_ID], references: [id_users])
   pendafataran     Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
 
   @@map("pengumuman")
