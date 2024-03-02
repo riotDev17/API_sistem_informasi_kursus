@@ -221,7 +221,7 @@ model Pengumuman {
   nilai_rata_rata  Int         @db.Integer
   createdAt        DateTime    @default(now())
   updatedAt        DateTime    @updatedAt
-  pendafataran     Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
+  pendaftaran      Pendaftaran @relation(fields: [pendaftaran_ID], references: [id_pendaftaran])
 
   @@map("pengumuman")
 }
